@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+:global(.main::-webkit-scrollbar) {
+  width: 0.25rem
+}
+
+:global(.main::-webkit-scrollbar-track) {
+  background: #1e1e24;
+}
+
+:global(.main::-webkit-scrollbar-thumb) {
+  color: #93CAED
+}
