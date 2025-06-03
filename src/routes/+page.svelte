@@ -17,8 +17,13 @@
       <div
         class="bg-[#111111] border-violet-700 border-1 rounded-[20px] h-full p-4"
       >
+        <p class="text-[red]">
+          NOTICE:<br /> I am currently working on this site, everything is subject
+          to change!
+        </p>
         <p>Glad to find you looking at my portfolio<br />Take a look around!</p>
         <p>I am a software engineer that likes to make pretty things :D</p>
+        <p>P.S. if you don't see a nice flowfield, reload the page!</p>
       </div>
     </div>
   </div>
