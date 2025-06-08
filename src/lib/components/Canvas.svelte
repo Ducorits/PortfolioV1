@@ -1,13 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getContext } from "svelte";
-  import type { CanvasRenderingContext2D } from "svelte/types/runtime";
 
   export let onDraw: (
     ctx: CanvasRenderingContext2D,
     width: number,
     height: number
   ) => void;
+
   let canvas: HTMLCanvasElement;
   let ctx: CanvasRenderingContext2D;
 
@@ -16,23 +15,33 @@
   let animationFrameId: number;
 
   function resizeCanvas() {
-    width = canvas.offsetWidth;
-    height = canvas.offsetHeight;
-    canvas.width = width;
-    canvas.height = height;
-  }
-
-  onMount(() => {
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
+
+    // Set actual pixel size of canvas
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
 
-    ctx = canvas.getContext("2d");
+    // Set CSS display size
+    canvas.style.width = `${rect.width}px`;
+    canvas.style.height = `${rect.height}px`;
+
+    width = rect.width;
+    height = rect.height;
+
+    // Get 2D context and scale it to match DPR
+    ctx = canvas.getContext("2d")!;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset any existing transforms
+    ctx.scale(dpr, dpr);
+  }
+
+  onMount(() => {
     resizeCanvas();
 
     function animate() {
-      onDraw(ctx, width, height);
+      if (ctx) {
+        onDraw(ctx, width, height);
+      }
       animationFrameId = requestAnimationFrame(animate);
     }
 
