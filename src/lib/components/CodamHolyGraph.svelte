@@ -151,6 +151,10 @@
       ring_5.update(time.deltaTime);
       ring_6.update(time.deltaTime);
     });
+
+    window.onresize = () => {
+      viewport.resize(window.innerWidth, window.innerHeight);
+    };
   });
 
   onDestroy(() => {

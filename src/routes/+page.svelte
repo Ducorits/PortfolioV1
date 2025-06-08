@@ -10,13 +10,13 @@
 
 <div class="flex w-full h-full pt-10 justify-center">
   <div
-    class="flex flex-col md:flex-row w-full md:w-2/3 h-full md:justify-between"
+    class="flex flex-col xl:flex-row w-full px-10 md:px-0 md:w-2/3 h-full md:justify-between gap-[40px]"
   >
-    <div class="md:w-1/3 w-full flex items-start justify-center p-4">
+    <div class="w-110 flex">
       <h1 class="text-gray-300 text-[100px] leading-[120px]">ducorits.</h1>
     </div>
     <div
-      class="bg-[#111111] border border-violet-700 rounded-[20px] p-6 text-white max-w-xl h-60"
+      class="bg-[#111111] h-auto border border-violet-700 rounded-[20px] p-6 text-white w-auto"
     >
       <p class="text-red-500 font-semibold mb-4">
         NOTICE:<br />
