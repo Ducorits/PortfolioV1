@@ -30,9 +30,11 @@
     height = rect.height;
 
     // Get 2D context and scale it to match DPR
-    ctx = canvas.getContext("2d")!;
-    ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset any existing transforms
-    ctx.scale(dpr, dpr);
+    ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset any existing transforms
+      ctx.scale(dpr, dpr);
+    }
   }
 
   onMount(() => {
