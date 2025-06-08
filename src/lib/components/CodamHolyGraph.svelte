@@ -1,7 +1,14 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
-  import { Application, Color, Container, Graphics, Point } from "pixi.js";
+  import {
+    Application,
+    Color,
+    Container,
+    FillGradient,
+    Graphics,
+    Point,
+  } from "pixi.js";
   import { CodamProjectBubble } from "$lib/components/CodamProject";
   import { GraphRing } from "./GraphRing";
 
@@ -18,7 +25,7 @@
     app = new Application();
 
     // Initialize the application
-    await app.init({ background: "#111111", resizeTo: window });
+    await app.init({ background: "#111122", resizeTo: window });
 
     // Append the application canvas to the document body
     container.appendChild(app.canvas);
@@ -52,48 +59,29 @@
     const holy_graph = new Container();
 
     // The rings
-    const ring_1 = new GraphRing(
-      150,
-      0.15,
-      { color: borderColor, width: 4 },
-      0
-    );
-    const ring_2 = new GraphRing(
-      300,
-      0.15,
-      { color: borderColor, width: 4 },
-      (Math.PI * 2) / 5
-    );
-    const ring_3 = new GraphRing(
-      450,
-      0.15,
-      { color: borderColor, width: 4 },
-      3
-    );
-    const ring_4 = new GraphRing(
-      570,
-      0.15,
-      { color: borderColor, width: 4 },
-      0.4
-    );
-    const ring_5 = new GraphRing(
-      690,
-      0.15,
-      { color: borderColor, width: 4 },
-      1
-    );
-    const ring_6 = new GraphRing(
-      810,
-      0.15,
-      { color: borderColor, width: 4 },
-      1.5
-    );
+    const stroke = { color: borderColor, width: 4 };
+    const gradient = new FillGradient({
+      type: "radial",
+      colorStops: [
+        { offset: 0, color: "#111155" },
+        { offset: 1, color: "#111122" },
+      ],
+    });
+
+    const ring_1 = new GraphRing(150, 0.15, stroke, 0);
+    const ring_2 = new GraphRing(300, 0.15, stroke, (Math.PI * 2) / 5);
+    const ring_3 = new GraphRing(450, 0.15, stroke, 3);
+    const ring_4 = new GraphRing(570, 0.15, stroke, 0.4);
+    const ring_5 = new GraphRing(690, 0.15, stroke, 1);
+    const ring_6 = new GraphRing(810, 0.15, stroke, 1.5);
+    const gradient_circle = new Graphics().circle(0, 0, 900).fill(gradient);
     ring_1.position = center;
     ring_2.position = center;
     ring_3.position = center;
     ring_4.position = center;
     ring_5.position = center;
     ring_6.position = center;
+    gradient_circle.position = center;
 
     // Create and add a container to the stage
     const libft = new CodamProjectBubble("Libft");
@@ -142,7 +130,16 @@
     const ft_transcendence = new CodamProjectBubble("ft_transcendance", 60);
     ring_6.addOrbital(ft_transcendence);
 
-    holy_graph.addChild(ring_1, ring_2, ring_3, ring_4, ring_5, ring_6, libft);
+    holy_graph.addChild(
+      gradient_circle,
+      ring_1,
+      ring_2,
+      ring_3,
+      ring_4,
+      ring_5,
+      ring_6,
+      libft
+    );
     viewport.addChild(holy_graph);
 
     // Listen for animate update
