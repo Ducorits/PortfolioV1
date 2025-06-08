@@ -1,23 +1,22 @@
 import { Color, Container, Graphics, Point, Text } from "pixi.js";
 import { selectedProject } from "$lib/stores/shared.svelte";
 
-export class CodamProjectBubble {
+export class CodamProjectBubble extends Container {
   id: string;
   borderColor: Color;
   fillColor: Color;
   radius: number;
-  container: Container;
   text: Text;
   circle: Graphics;
   startPos: Point;
 
-  constructor(text: string, pos: Point) {
+  constructor(text: string, radius?: number, pos?: Point) {
+    super();
     this.id = text;
     this.borderColor = new Color(0x6f16e4);
     this.fillColor = new Color(0x6f16e4);
-    this.radius = 40;
-    this.startPos = pos;
-    this.container = new Container();
+    this.radius = radius ? radius : 40;
+    this.startPos = pos ? pos : new Point();
     this.text = new Text({
       text: text,
       style: {
@@ -29,7 +28,7 @@ export class CodamProjectBubble {
       },
     });
 
-    this.container.position = pos;
+    this.position = this.startPos;
 
     let scale = 1;
     if (this.text.width > this.radius * 2 * 0.8)
@@ -38,7 +37,7 @@ export class CodamProjectBubble {
     this.text.x -= this.text.width / 2;
     this.text.y -= this.text.height / 2;
     this.circle = new Graphics()
-      .circle(0, 0, 50)
+      .circle(0, 0, this.radius)
       .fill(this.fillColor)
       .stroke({ color: this.borderColor, width: 4 });
 
@@ -49,7 +48,7 @@ export class CodamProjectBubble {
       else selectedProject.id = "";
     });
 
-    this.container.addChild(this.circle);
-    this.container.addChild(this.text);
+    this.addChild(this.circle);
+    this.addChild(this.text);
   }
 }

@@ -1,23 +1,27 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
   import { Application, Color, Container, Graphics, Point } from "pixi.js";
   import { CodamProjectBubble } from "$lib/components/CodamProject";
+  import { GraphRing } from "./GraphRing";
+
+  let app: Application | null = null;
+
+  let container: HTMLDivElement;
 
   onMount(async () => {
     if (!browser) return;
 
     const { Viewport } = await import("pixi-viewport");
 
-    const borderColor = new Color(0x6f16e4);
     // Create a new application
-    const app = new Application();
+    app = new Application();
 
     // Initialize the application
     await app.init({ background: "#111111", resizeTo: window });
 
     // Append the application canvas to the document body
-    document.body.appendChild(app.canvas);
+    container.appendChild(app.canvas);
     app.canvas.classList.add(
       "fixed",
       "top-0",
@@ -27,28 +31,6 @@
       "-z-10"
     );
 
-    let angle = 0;
-    const center = new Point(app.screen.width / 2, app.screen.height / 2);
-    const radius = 200;
-
-    // Create and add a container to the stage
-    const holy_graph = new Container();
-    const libft = new CodamProjectBubble(
-      "Libft",
-      new Point(center.x, center.y)
-    );
-    const printf = new CodamProjectBubble(
-      "ft_printf",
-      new Point(center.x + 40, center.y + -40)
-    );
-    const get_next_line = new CodamProjectBubble(
-      "get_next_line",
-      new Point(center.x + 80, center.y + 180)
-    );
-    const born_to_be_root = new CodamProjectBubble(
-      "Born2beroot",
-      new Point(center.x + 200, center.y)
-    );
     const viewport = new Viewport({
       screenWidth: window.innerWidth,
       screenHeight: window.innerHeight,
@@ -63,66 +45,122 @@
     // activate plugins
     viewport.drag().pinch().wheel().decelerate();
 
-    const ring_1 = new Graphics()
-      .circle(0, 0, 200)
-      .stroke({ color: borderColor, width: 4 });
-    const ring_2 = new Graphics()
-      .circle(0, 0, 400)
-      .stroke({ color: borderColor, width: 4 });
-    const ring_3 = new Graphics()
-      .circle(0, 0, 600)
-      .stroke({ color: borderColor, width: 4 });
-    const ring_4 = new Graphics()
-      .circle(0, 0, 700)
-      .stroke({ color: borderColor, width: 4 });
-    const ring_5 = new Graphics()
-      .circle(0, 0, 800)
-      .stroke({ color: borderColor, width: 4 });
-    const ring_6 = new Graphics()
-      .circle(0, 0, 900)
-      .stroke({ color: borderColor, width: 4 });
+    const borderColor = new Color(0x6f16e4);
+    const center = new Point(app.screen.width / 2, app.screen.height / 2);
 
-    holy_graph.addChild(
-      ring_1,
-      ring_2,
-      ring_3,
-      ring_4,
-      ring_5,
-      ring_6,
-      libft.container,
-      printf.container,
-      get_next_line.container,
-      born_to_be_root.container
+    // Main container
+    const holy_graph = new Container();
+
+    // The rings
+    const ring_1 = new GraphRing(
+      150,
+      0.15,
+      { color: borderColor, width: 4 },
+      0
     );
+    const ring_2 = new GraphRing(
+      300,
+      0.15,
+      { color: borderColor, width: 4 },
+      (Math.PI * 2) / 5
+    );
+    const ring_3 = new GraphRing(
+      450,
+      0.15,
+      { color: borderColor, width: 4 },
+      3
+    );
+    const ring_4 = new GraphRing(
+      570,
+      0.15,
+      { color: borderColor, width: 4 },
+      0.4
+    );
+    const ring_5 = new GraphRing(
+      690,
+      0.15,
+      { color: borderColor, width: 4 },
+      1
+    );
+    const ring_6 = new GraphRing(
+      810,
+      0.15,
+      { color: borderColor, width: 4 },
+      1.5
+    );
+    ring_1.position = center;
+    ring_2.position = center;
+    ring_3.position = center;
+    ring_4.position = center;
+    ring_5.position = center;
+    ring_6.position = center;
+
+    // Create and add a container to the stage
+    const libft = new CodamProjectBubble("Libft");
+    libft.x = center.x;
+    libft.y = center.y;
+
+    // Ring 1
+    const printf = new CodamProjectBubble("ft_printf");
+    const get_next_line = new CodamProjectBubble("get_next_line");
+    const born_to_be_root = new CodamProjectBubble("Born2beroot");
+    ring_1.addOrbital(printf);
+    ring_1.addOrbital(get_next_line);
+    ring_1.addOrbital(born_to_be_root);
+
+    // Ring 2
+    const push_swap = new CodamProjectBubble("push_swap");
+    const pipex = new CodamProjectBubble("pipex");
+    const fdf = new CodamProjectBubble("FdF");
+    ring_2.addOrbital(push_swap);
+    ring_2.addOrbital(pipex);
+    ring_2.addOrbital(fdf);
+
+    // Ring 3
+    const philosophers = new CodamProjectBubble("Philosophers");
+    const minishell = new CodamProjectBubble("minishell");
+    ring_3.addOrbital(philosophers);
+    ring_3.addOrbital(minishell);
+
+    // Ring 4
+    const cub3d = new CodamProjectBubble("cub3d");
+    const net_practice = new CodamProjectBubble("NetPractice");
+    const cpp0_4 = new CodamProjectBubble("CPP Modules 0-4");
+    ring_4.addOrbital(cub3d);
+    ring_4.addOrbital(net_practice);
+    ring_4.addOrbital(cpp0_4);
+
+    // Ring 5
+    const webserv = new CodamProjectBubble("webserv");
+    const inception = new CodamProjectBubble("Inception");
+    const cpp5_9 = new CodamProjectBubble("CPP Modules 5-9");
+    ring_5.addOrbital(webserv);
+    ring_5.addOrbital(inception);
+    ring_5.addOrbital(cpp5_9);
+
+    // Ring 6
+    const ft_transcendence = new CodamProjectBubble("ft_transcendance", 60);
+    ring_6.addOrbital(ft_transcendence);
+
+    holy_graph.addChild(ring_1, ring_2, ring_3, ring_4, ring_5, ring_6, libft);
     viewport.addChild(holy_graph);
 
     // Listen for animate update
     app.ticker.add((time) => {
-      angle = 0.005 * time.deltaTime;
-      libft.container.x = center.x;
-      libft.container.y = center.y;
-      ring_1.position = center;
-      ring_2.position = center;
-      ring_3.position = center;
-      ring_4.position = center;
-      ring_5.position = center;
-      ring_6.position = center;
-      printf.container.position = rotateAroundPivot(
-        center,
-        printf.container.position,
-        angle
-      );
-      get_next_line.container.position = rotateAroundPivot(
-        center,
-        get_next_line.container.position,
-        angle
-      );
-      born_to_be_root.container.position = rotateAroundPivot(
-        center,
-        born_to_be_root.container.position,
-        angle
-      );
+      ring_1.update(time.deltaTime);
+      ring_2.update(time.deltaTime);
+      ring_3.update(time.deltaTime);
+      ring_4.update(time.deltaTime);
+      ring_5.update(time.deltaTime);
+      ring_6.update(time.deltaTime);
     });
+  });
+
+  onDestroy(() => {
+    if (app) {
+      app.destroy(true);
+      app = null;
+    }
   });
 
   function rotateAroundPivot(
@@ -142,3 +180,5 @@
     };
   }
 </script>
+
+<div class="absolute inset-0 -z-10" bind:this={container}></div>
