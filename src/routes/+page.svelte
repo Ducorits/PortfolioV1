@@ -13,7 +13,11 @@
     class="flex flex-col xl:flex-row w-full px-10 md:px-0 md:w-2/3 h-full md:justify-between gap-[40px]"
   >
     <div class="w-110 flex">
-      <h1 class="text-gray-300 text-[100px] leading-[120px]">ducorits.</h1>
+      <h1
+        class="text-gray-300 text-[60px] sm:text-[100px] leading-[100px] sm:leading-[120px]"
+      >
+        ducorits.
+      </h1>
     </div>
     <div
       class="bg-[#111111] h-auto border border-violet-700 rounded-[20px] p-6 text-white w-auto"
