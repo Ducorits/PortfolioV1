@@ -10,6 +10,7 @@
     Point,
   } from "pixi.js";
   import { rotateAroundPivot } from "$lib/utils";
+  import { settings, type FlowSettings } from "$lib/stores/settings";
 
   let app: Application | null = null;
 
@@ -22,6 +23,12 @@
     uVec: Point;
   }
 
+  let cfg: FlowSettings;
+  const unsub = settings.subscribe((v) => {
+    cfg = v;
+    // optionally: re‑build grid or reset particles here
+  });
+
   onMount(async () => {
     if (!browser) return;
 
@@ -30,7 +37,7 @@
 
     // Initialize the application
     await app.init({
-      background: "#111122",
+      background: cfg.backgroundColor,
       resizeTo: window,
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
@@ -66,12 +73,13 @@
     const cellSize = 10;
     const rows: number = Math.floor(height / cellSize);
     const cols: number = Math.floor(width / cellSize);
-    const curve: number = 2;
+    const curve: number = 1;
     const zoom: number = 0.05;
-    const particleCount: number = 5000;
+    const particleCount: number = 1000;
     const particles: Graphics[] = [];
     let grid: Cell[] = [];
     let angle: number = 0;
+    let debug: boolean = false;
 
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
@@ -86,22 +94,30 @@
       }
     }
 
-    // for (let i = 0; i < grid.length; i++) {
-    //   let cell = grid[i];
-    //   let point = rotateAroundPivot(
-    //     { x: cell.x, y: cell.y },
-    //     { x: cell.x + 10, y: cell.y },
-    //     cell.angle
-    //   );
-    //   let arrow = new Graphics()
-    //     .moveTo(cell.x, cell.y)
-    //     .lineTo(point.x, point.y)
-    //     .stroke({ color: 0x888888, pixelLine: true });
-    //   flow_field.addChild(arrow);
-    // }
+    if (debug) {
+      for (let i = 0; i < grid.length; i++) {
+        let cell = grid[i];
+        let point = rotateAroundPivot(
+          { x: cell.x, y: cell.y },
+          { x: cell.x + 10, y: cell.y },
+          cell.angle
+        );
+        let arrow = new Graphics()
+          .moveTo(cell.x, cell.y)
+          .lineTo(point.x, point.y)
+          .stroke({ color: 0x888888, pixelLine: true });
+        flow_field.addChild(arrow);
+      }
+    }
 
-    for (let i = 0; i < particleCount; i++) {
-      let particle = new Graphics().circle(0, 0, 4).fill("#aa0033");
+    const colors: string[] = cfg.particleColors;
+
+    for (let i = 0; i < cfg.particleCount; i++) {
+      let colorIndex = Math.floor(Math.random() * colors.length);
+
+      let particle = new Graphics()
+        .circle(0, 0, cfg.particleSize)
+        .fill(colors[colorIndex]);
       particle.x = Math.random() * width;
       particle.y = Math.random() * height;
 
@@ -115,8 +131,10 @@
     app.ticker.add((time) => {
       // console.log("ticking");
       const fade = new Graphics();
-      fade.rect(0, 0, width, height).fill({ color: 0x111122, alpha: 0.05 });
-      if (app) app.renderer.render(fade); // Overlay this fade layer
+      fade
+        .rect(0, 0, width, height)
+        .fill({ color: cfg.backgroundColor, alpha: cfg.fadeAlpha });
+      // if (app) app.renderer.render(fade); // Overlay this fade layer
 
       for (let p of particles) {
         let col = Math.floor(p.x / cellSize);
@@ -140,6 +158,7 @@
   });
 
   onDestroy(() => {
+    unsub();
     if (app) {
       app.destroy(true);
       app = null;
