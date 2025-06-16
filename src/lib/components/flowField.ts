@@ -138,45 +138,6 @@ class Effect {
     this.debug = false;
     this.initialized = false;
   }
-  // constructor(ctx: CanvasRenderingContext2D, width: number, height: number) {
-  // 	this.context = ctx;
-  // 	this.width = width;
-  // 	this.height = height;
-  // 	this.particles = [];
-  // 	this.numberOfParticles = 1000;
-  // 	this.cellSize = 5;
-  // 	this.rows = 0;
-  // 	this.cols = 0;
-  // 	this.flowField = [];
-  // 	this.curve = 2;
-  // 	this.zoom = 0.01;
-  // 	this.debug = false;
-  // 	this.init();
-
-  // 	window.addEventListener('keydown', e => {
-  // 		if (e.key === 'd') this.debug = !this.debug;
-  // 	});
-  // }
-
-  drawText() {
-    this.context.font = "300px Arial";
-    this.context.textAlign = "center";
-    this.context.textBaseline = "middle";
-
-    const gradient1 = this.context.createLinearGradient(
-      0,
-      0,
-      this.width,
-      this.height
-    );
-    gradient1.addColorStop(0.2, "rgb(255,0,255)");
-    gradient1.addColorStop(0.4, "rgb(255,0,255)");
-    gradient1.addColorStop(0.6, "rgb(255,255,255)");
-    gradient1.addColorStop(0.8, "rgb(0,0,255)");
-
-    this.context.fillStyle = "rgba(150,150,150,0.8)";
-    // this.context.fillText('duco', this.width * 0.5, this.height * 0.5, this.width * 0.8);
-  }
 
   init(ctx: CanvasRenderingContext2D, width: number, height: number) {
     this.context = ctx;
@@ -185,8 +146,6 @@ class Effect {
     this.rows = Math.floor(this.height / this.cellSize);
     this.cols = Math.floor(this.width / this.cellSize);
     this.flowField = [];
-
-    this.drawText();
 
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
@@ -234,13 +193,11 @@ class Effect {
   render() {
     if (this.debug) {
       this.drawGrid();
-      this.drawText();
     }
     this.particles.forEach((particle) => {
       particle.draw(this.context);
       particle.update();
     });
-    this.drawText();
   }
 }
 
