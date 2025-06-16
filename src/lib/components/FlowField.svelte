@@ -16,6 +16,12 @@
 
   let container: HTMLDivElement;
 
+  // Layers & data
+  let arrowsLayer: Container;
+  let particlesLayer: Container;
+  const particles: Graphics[] = [];
+  let grid: Cell[] = [];
+
   interface Cell {
     x: number;
     y: number;
@@ -24,10 +30,7 @@
   }
 
   let cfg: FlowSettings;
-  const unsub = settings.subscribe((v) => {
-    cfg = v;
-    // optionally: re‑build grid or reset particles here
-  });
+  let unsub = () => {};
 
   onMount(async () => {
     if (!browser) return;
@@ -37,7 +40,7 @@
 
     // Initialize the application
     await app.init({
-      background: cfg.backgroundColor,
+      background: "#111122",
       resizeTo: window,
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
@@ -45,117 +48,120 @@
       preserveDrawingBuffer: true,
     });
 
-    // Disable auto-clearing
-
     if (!container) {
       console.warn("Container not found!");
       return;
     }
 
-    console.log("mounted");
+    console.log("FlowField Mounted");
 
     // Append the application canvas to the document body
     container.appendChild(app.canvas);
-    app.canvas.classList.add(
-      "fixed",
-      "top-0",
-      "left-0",
-      "w-screen",
-      "h-screen",
-      "-z-10"
-    );
+    app.canvas.classList.add("fixed", "inset-0", "-z-10");
 
     // Main container
-    const flow_field = new Container();
+    const flowField = new Container();
+    arrowsLayer = new Container();
+    particlesLayer = new Container();
+    flowField.addChild(arrowsLayer, particlesLayer);
+    app.stage.addChild(flowField);
 
-    const width: number = app.screen.width;
-    const height: number = app.screen.height;
-    const cellSize = 10;
-    const rows: number = Math.floor(height / cellSize);
-    const cols: number = Math.floor(width / cellSize);
-    const curve: number = 1;
-    const zoom: number = 0.05;
-    const particleCount: number = 1000;
-    const particles: Graphics[] = [];
-    let grid: Cell[] = [];
-    let angle: number = 0;
-    let debug: boolean = false;
+    unsub = settings.subscribe((newCfg) => {
+      cfg = newCfg;
+      resetScene();
+    });
+    resetScene();
+  });
 
+  function resetScene() {
+    if (!app) return;
+    const width = app.screen.width;
+    const height = app.screen.height;
+
+    // remove previous
+    arrowsLayer.removeChildren();
+    particlesLayer.removeChildren();
+    grid = [];
+    particles.length = 0;
+
+    const rows: number = Math.floor(height / cfg.cellSize);
+    const cols: number = Math.floor(width / cfg.cellSize);
+    // setup grid and debug arrows.
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        angle = (Math.cos(x * zoom) + Math.sin(y * zoom)) * curve;
+        let angle =
+          (Math.cos(x * cfg.zoom) + Math.sin(y * cfg.zoom)) * cfg.curve;
         const unitVector = new Point(Math.cos(angle), Math.sin(angle));
+        const pos = new Point(x * cfg.cellSize, y * cfg.cellSize);
         grid.push({
-          x: x * cellSize,
-          y: y * cellSize,
+          x: pos.x,
+          y: pos.y,
           angle: angle,
           uVec: unitVector,
         });
+        if (cfg.showDebug) {
+          const arrow = new Graphics()
+            .moveTo(pos.x, pos.y)
+            .lineTo(pos.x + unitVector.x * 10, pos.y + unitVector.y * 10)
+            .stroke({ color: 0x888888, pixelLine: true });
+          arrowsLayer.addChild(arrow);
+        }
       }
     }
 
-    if (debug) {
-      for (let i = 0; i < grid.length; i++) {
-        let cell = grid[i];
-        let point = rotateAroundPivot(
-          { x: cell.x, y: cell.y },
-          { x: cell.x + 10, y: cell.y },
-          cell.angle
-        );
-        let arrow = new Graphics()
-          .moveTo(cell.x, cell.y)
-          .lineTo(point.x, point.y)
-          .stroke({ color: 0x888888, pixelLine: true });
-        flow_field.addChild(arrow);
-      }
-    }
-
-    const colors: string[] = cfg.particleColors;
-
+    // setup particles
     for (let i = 0; i < cfg.particleCount; i++) {
-      let colorIndex = Math.floor(Math.random() * colors.length);
+      let colorIndex = Math.floor(Math.random() * cfg.particleColors.length);
 
-      let particle = new Graphics()
+      let g = new Graphics()
         .circle(0, 0, cfg.particleSize)
-        .fill(colors[colorIndex]);
-      particle.x = Math.random() * width;
-      particle.y = Math.random() * height;
+        .fill(cfg.particleColors[colorIndex]);
+      g.x = Math.random() * width;
+      g.y = Math.random() * height;
 
-      particles.push(particle);
-      flow_field.addChild(particle);
+      particles.push(g);
+      particlesLayer.addChild(g);
     }
 
-    app.stage.addChild(flow_field);
+    // Add ticker
+    app.ticker.remove(update);
+    app.ticker.add(update);
+  }
 
-    // Listen for animate update
-    app.ticker.add((time) => {
-      // console.log("ticking");
-      const fade = new Graphics();
-      fade
-        .rect(0, 0, width, height)
-        .fill({ color: cfg.backgroundColor, alpha: cfg.fadeAlpha });
-      // if (app) app.renderer.render(fade); // Overlay this fade layer
+  function update(ticker: any) {
+    if (!app) return;
+    const width = app.screen.width;
+    const height = app.screen.height;
 
-      for (let p of particles) {
-        let col = Math.floor(p.x / cellSize);
-        let row = Math.floor(p.y / cellSize);
-        if (col < 0 || col >= cols || row < 0 || row >= rows) {
-          p.x = Math.random() * width;
-          p.y = Math.random() * height;
-          continue;
-        }
-        let index = row * cols + col;
+    // console.log("ticking");
+    const fade = new Graphics();
+    fade
+      .rect(0, 0, width, height)
+      .fill({ color: cfg.backgroundColor, alpha: cfg.fadeAlpha });
+    if (app) app.renderer.render(fade); // Overlay this fade layer
 
-        let cell = grid[index];
-        p.x += cell.uVec.x * time.deltaTime * 0.5;
-        p.y += cell.uVec.y * time.deltaTime * 0.5;
-        if (p.x < 0 || p.x >= width || p.y >= height || p.y < 0) {
-          p.x = Math.random() * width;
-          p.y = Math.random() * height;
-        }
+    const cols: number = Math.floor(width / cfg.cellSize);
+    const rows: number = Math.floor(height / cfg.cellSize);
+    const delta = ticker.deltaTime;
+    for (let p of particles) {
+      let col = Math.floor(p.x / cfg.cellSize);
+      let row = Math.floor(p.y / cfg.cellSize);
+      if (col < 0 || col >= cols || row < 0 || row >= rows) {
+        p.x = Math.random() * width;
+        p.y = Math.random() * height;
+        continue;
       }
-    });
-  });
+      let index = row * cols + col;
+
+      let cell = grid[index];
+      p.x += cell.uVec.x * delta * 0.5;
+      p.y += cell.uVec.y * delta * 0.5;
+      if (p.x < 0 || p.x >= width || p.y >= height || p.y < 0) {
+        p.x = Math.random() * width;
+        p.y = Math.random() * height;
+      }
+    }
+  }
 
   onDestroy(() => {
     unsub();
