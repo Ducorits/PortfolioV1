@@ -1,15 +1,7 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
-  import {
-    Application,
-    Color,
-    Container,
-    FillGradient,
-    Graphics,
-    Point,
-  } from "pixi.js";
-  import { rotateAroundPivot } from "$lib/utils";
+  import { Application, Container, Graphics, Point } from "pixi.js";
   import { settings, type FlowSettings } from "$lib/stores/settings";
 
   let app: Application | null = null;
@@ -20,7 +12,12 @@
   let arrowsLayer: Container;
   let particlesLayer: Container;
   const particles: Graphics[] = [];
-  let grid: Cell[] = [];
+  let grid: Cell[][] = [];
+  let rows: number = 0;
+  let cols: number = 0;
+
+  let dragging = false;
+  let lastMouse = new Point();
 
   interface Cell {
     x: number;
@@ -66,12 +63,74 @@
     flowField.addChild(arrowsLayer, particlesLayer);
     app.stage.addChild(flowField);
 
+    // inside onMount, AFTER you append `app.view`…
+    flowField.interactive = true; // enable Pixi interaction
+    flowField.hitArea = app.screen;
+    // app.renderer.interaction.cursorStyles.default = "crosshair";
+
+    flowField
+      .on("pointerdown", (e) => {
+        dragging = true;
+        lastMouse.copyFrom(e.global);
+      })
+      .on("pointerup", () => {
+        dragging = false;
+      })
+      .on("pointerupoutside", () => {
+        dragging = false; // in case they release off‑canvas
+      })
+      .on("pointermove", (e) => {
+        if (!dragging) return;
+        const mouse = e.global;
+        const dragDir = new Point(mouse.x - lastMouse.x, mouse.y - lastMouse.y);
+        const mag = Math.hypot(dragDir.x, dragDir.y);
+        if (mag > 1) {
+          dragDir.x /= mag;
+          dragDir.y /= mag;
+          perturbGrid(mouse, dragDir);
+          lastMouse.copyFrom(mouse);
+        }
+      });
+
     unsub = settings.subscribe((newCfg) => {
       cfg = newCfg;
       resetScene();
     });
     resetScene();
   });
+
+  function perturbGrid(mouse: Point, dir: Point) {
+    const brushRadius = 100;
+    const radiusInCells = Math.ceil(brushRadius / cfg.cellSize);
+    const centerRow = Math.floor(mouse.y / cfg.cellSize);
+    const centerCol = Math.floor(mouse.x / cfg.cellSize);
+
+    for (let dy = -radiusInCells; dy < radiusInCells; dy++) {
+      console.log(dy);
+      const row = centerRow + dy;
+      if (row < 0 || row >= rows) continue;
+      for (let dx = -radiusInCells; dx < radiusInCells; dx++) {
+        const col = centerCol + dx;
+        if (col < 0 || col >= cols) continue;
+
+        const cell = grid[row][col];
+        const dist = Math.hypot(cell.x - mouse.x, cell.y - mouse.y);
+        if (dist > brushRadius) continue;
+
+        const influence = 1 - dist / brushRadius;
+        const strength = 10;
+
+        // console.log(influence);
+        cell.uVec.x += dir.x * influence * strength;
+        cell.uVec.y += dir.y * influence * strength;
+        // normalize if needed
+        const len = Math.hypot(cell.uVec.x, cell.uVec.y);
+        cell.uVec.x /= len;
+        cell.uVec.y /= len;
+        // grid[row][col] = cell;
+      }
+    }
+  }
 
   function resetScene() {
     if (!app) return;
@@ -81,24 +140,24 @@
     // remove previous
     arrowsLayer.removeChildren();
     particlesLayer.removeChildren();
-    grid = [];
     particles.length = 0;
 
-    const rows: number = Math.floor(height / cfg.cellSize);
-    const cols: number = Math.floor(width / cfg.cellSize);
+    rows = Math.floor(height / cfg.cellSize);
+    cols = Math.floor(width / cfg.cellSize);
     // setup grid and debug arrows.
     for (let y = 0; y < rows; y++) {
+      grid[y] = [];
       for (let x = 0; x < cols; x++) {
         let angle =
           (Math.cos(x * cfg.zoom) + Math.sin(y * cfg.zoom)) * cfg.curve;
         const unitVector = new Point(Math.cos(angle), Math.sin(angle));
         const pos = new Point(x * cfg.cellSize, y * cfg.cellSize);
-        grid.push({
+        grid[y][x] = {
           x: pos.x,
           y: pos.y,
           angle: angle,
           uVec: unitVector,
-        });
+        };
         if (cfg.showDebug) {
           const arrow = new Graphics()
             .moveTo(pos.x, pos.y)
@@ -140,8 +199,8 @@
       .fill({ color: cfg.backgroundColor, alpha: cfg.fadeAlpha });
     if (app) app.renderer.render(fade); // Overlay this fade layer
 
-    const cols: number = Math.floor(width / cfg.cellSize);
-    const rows: number = Math.floor(height / cfg.cellSize);
+    cols = Math.floor(width / cfg.cellSize);
+    rows = Math.floor(height / cfg.cellSize);
     const delta = ticker.deltaTime;
     for (let p of particles) {
       let col = Math.floor(p.x / cfg.cellSize);
@@ -151,9 +210,8 @@
         p.y = Math.random() * height;
         continue;
       }
-      let index = row * cols + col;
 
-      let cell = grid[index];
+      let cell = grid[row][col];
       p.x += cell.uVec.x * delta * 0.5;
       p.y += cell.uVec.y * delta * 0.5;
       if (p.x < 0 || p.x >= width || p.y >= height || p.y < 0) {
