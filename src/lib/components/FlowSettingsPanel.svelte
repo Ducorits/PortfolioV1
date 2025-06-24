@@ -1,119 +1,24 @@
-<!-- src/lib/components/FlowSettingsPanel.svelte
 <script lang="ts">
   import { settings, type FlowSettings } from "$lib/stores/settings";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
+  import ColorPopover from "./ColorPopover.svelte";
 
   let open = false;
   let local: FlowSettings;
-
-  // keep a local copy for two‑way binding, then push on “Apply”
+  let isClient = false;
+  let showBackgroundPicker = false;
+  let particlePickerStates: boolean[] = [];
+  let selectedParticleIndex: number | null = null;
+  let pickerPosition = { top: 0, left: 0 };
   const unsubscribe = settings.subscribe((v) => (local = { ...v }));
-  onMount(() => () => unsubscribe());
 
-  function apply() {
-    settings.set(local);
-  }
-</script>
+  onMount(() => {
+    isClient = true;
+    particlePickerStates = local.particleColors.map(() => false);
 
-<button class="toggle-btn cursor-pointer" on:click={() => (open = !open)}>
-  {open ? "Close ⚙️" : "Settings ⚙️"}
-</button>
-
-<div class="panel" class:open>
-  <button
-    class="toggle-btn bg-violet-600 p-2 rounded-[10px] cursor-pointer"
-    on:click={() => (open = !open)}
-  >
-    {open ? "Close ⚙️" : "Settings ⚙️"}
-  </button>
-  <h2>Flow Field Settings</h2>
-
-  <label>
-    Cell Size:
-    <input
-      class="text-black"
-      type="number"
-      bind:value={local.cellSize}
-      min="1"
-    />
-  </label>
-
-  <label>
-    Curve:
-    <input type="range" bind:value={local.curve} min="0" max="5" step="0.1" />
-    {local.curve}
-  </label>
-
-  <label>
-    Zoom:
-    <input
-      type="range"
-      bind:value={local.zoom}
-      min="0.001"
-      max="0.1"
-      step="0.001"
-    />
-    {local.zoom}
-  </label>
-
-  <label>
-    Particle Count:
-    <input type="number" bind:value={local.particleCount} min="0" max="10000" />
-  </label>
-
-  <label>
-    Fade Alpha:
-    <input
-      type="range"
-      bind:value={local.fadeAlpha}
-      min="0"
-      max="0.2"
-      step="0.005"
-    />
-    {local.fadeAlpha}
-  </label>
-
-  <label>
-    <input type="checkbox" bind:checked={local.showDebug} />
-    Show Debug Vectors
-  </label>
-
-  <button on:click={apply}>Apply</button>
-</div>
-
-<style>
-  .panel {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100%;
-    backdrop-filter: blur(4px);
-    background: rgba(20, 20, 30, 0.8);
-    padding: 1rem;
-    transform: translateX(100%);
-    transition: transform 0.3s;
-    color: white;
-  }
-  .panel.open {
-    transform: translateX(0);
-  }
-  .toggle-btn {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-  }
-</style> -->
-
-<!-- src/lib/components/FlowSettingsPanel.svelte -->
-<script lang="ts">
-  import { settings, type FlowSettings } from "$lib/stores/settings";
-  import { onMount } from "svelte";
-
-  let open = false;
-  let local: FlowSettings;
-  const unsubscribe = settings.subscribe((v) => (local = { ...v }));
-  onMount(() => () => unsubscribe());
+    import("vanilla-colorful/hex-color-picker.js");
+    return () => unsubscribe();
+  });
 
   function apply() {
     settings.set(local);
@@ -199,6 +104,79 @@
       <span class="w-12 text-right text-white">{local.fadeAlpha}</span>
     </div>
 
+    <label class="self-center text-white col-span-1">Background Color</label>
+    <div class="col-span-1">
+      <button
+        class="w-full h-10 rounded"
+        style="background-color: {local.backgroundColor}"
+        on:click={() => (showBackgroundPicker = !showBackgroundPicker)}
+      />
+    </div>
+
+    {#if isClient && showBackgroundPicker}
+      <div class="col-span-2 flex justify-center">
+        <hex-color-picker
+          color={local.backgroundColor}
+          on:color-changed={(e) => (local.backgroundColor = e.detail.value)}
+          style="width: 100%; max-width: 200px; height: 200px;"
+        />
+      </div>
+    {/if}
+
+    <label class="self-center text-white col-span-2">Particle Colors</label>
+
+    <div class="grid grid-cols-6 col-span-2 gap-1 items-center relative">
+      {#each local.particleColors as color, i}
+        <div class="flex items-center col-span-2 space-x-2">
+          <button
+            class="w-10 h-10 rounded shadow"
+            style="background-color: {color}"
+            on:click={async (e) => {
+              if (selectedParticleIndex === i) {
+                selectedParticleIndex = null;
+                console.log(selectedParticleIndex);
+              } else {
+                const rect = (
+                  e.currentTarget as HTMLElement
+                ).getBoundingClientRect();
+                pickerPosition = {
+                  top: rect.bottom + window.scrollY + 8,
+                  left: rect.left + window.scrollX,
+                };
+                selectedParticleIndex = i;
+                console.log(selectedParticleIndex);
+              }
+            }}
+          />
+          <span class="text-white text-sm truncate">{color}</span>
+        </div>
+      {/each}
+    </div>
+
+    <div class="col-span-2 flex space-x-4 mt-2">
+      <button
+        class="bg-gray-600 text-white px-3 py-1 rounded hover:bg-green-500"
+        on:click={() => {
+          local.particleColors = [...local.particleColors, "#ffffff"];
+          particlePickerStates = [...particlePickerStates, true];
+        }}
+      >
+        + Add Color
+      </button>
+
+      {#if local.particleColors.length > 1}
+        <button
+          class="bg-gray-600 text-white px-3 py-1 rounded hover:bg-red-500"
+          on:click={() => {
+            local.particleColors = local.particleColors.slice(0, -1);
+            particlePickerStates = particlePickerStates.slice(0, -1);
+          }}
+        >
+          – Remove Last
+        </button>
+      {/if}
+    </div>
+
     <label class="flex items-center text-white">
       <input type="checkbox" bind:checked={local.showDebug} class="mr-2" />
       Show Debug
@@ -214,3 +192,14 @@
     Apply
   </button>
 </aside>
+
+{#if isClient && selectedParticleIndex != null}
+  <ColorPopover
+    position={pickerPosition}
+    color={local.particleColors[selectedParticleIndex]}
+    onColorChange={(val) => {
+      local.particleColors[selectedParticleIndex] = val;
+    }}
+    onClose={() => (selectedParticleIndex = null)}
+  />
+{/if}
