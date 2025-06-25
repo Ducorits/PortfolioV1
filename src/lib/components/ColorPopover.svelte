@@ -11,6 +11,7 @@
 
   // 2) internal reactive copy of color
   let internalColor = $state(color);
+  let hexColor = $state(internalColor);
 
   // 3) sync external → internal if parent changes `color`
   $effect(() => {
@@ -50,8 +51,8 @@
   <!-- 6) direct hex input -->
   <input
     type="text"
-    bind:value={internalColor}
-    oninput={() => onColorChange(internalColor)}
+    bind:value={hexColor}
+    oninput={() => onColorChange(hexColor)}
     class="w-full mt-2 p-1 bg-[#2a2a2a] text-white text-sm rounded"
   />
 

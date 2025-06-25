@@ -44,7 +44,7 @@
       type="number"
       bind:value={local.cellSize}
       min="1"
-      class="col-span-1 w-full rounded px-2 py-1"
+      class="col-span-1 w-full text-white bg-[#00000000] rounded px-2 py-1"
     />
 
     <label class="self-center text-white">Curve</label>
@@ -55,7 +55,7 @@
         min="0"
         max="5"
         step="0.1"
-        class="flex-1"
+        class="flex-1 bg-transparent"
       />
       <span class="w-12 text-right text-white">{local.curve}</span>
     </div>
@@ -79,7 +79,7 @@
       bind:value={local.particleCount}
       min="0"
       max="10000"
-      class="w-full rounded px-2 py-1"
+      class="w-full rounded text-white bg-[#00000000] px-2 py-1"
     />
 
     <label class="self-center text-white">Particle Size</label>
@@ -88,40 +88,57 @@
       bind:value={local.particleSize}
       min="0"
       max="10000"
-      class="w-full rounded px-2 py-1"
+      class="w-full rounded text-white bg-[#00000000] px-2 py-1"
     />
 
-    <label class="self-center text-white">Fade Alpha</label>
+    <label class="self-center text-white" for="fade-alpha-input"
+      >Ghost effect</label
+    >
     <div class="flex items-center space-x-2">
       <input
+        id="fade-alpha-input"
         type="range"
         bind:value={local.fadeAlpha}
         min="0"
-        max="0.2"
+        max="0.1"
         step="0.005"
         class="flex-1"
       />
       <span class="w-12 text-right text-white">{local.fadeAlpha}</span>
     </div>
 
-    <label class="self-center text-white col-span-1">Background Color</label>
-    <div class="col-span-1">
+    <label class="self-center text-white col-span-1" for="background-color-btn"
+      >Background Color</label
+    >
+    <div class="flex items-center col-span-1 space-x-2">
       <button
-        class="w-full h-10 rounded"
+        id="background-color-btn"
+        aria-label="Background color selector"
+        class="w-10 h-10 rounded"
         style="background-color: {local.backgroundColor}"
-        on:click={() => (showBackgroundPicker = !showBackgroundPicker)}
+        on:click={(e) => {
+          if (showBackgroundPicker) {
+            showBackgroundPicker = !showBackgroundPicker;
+          } else {
+            const rect = (
+              e.currentTarget as HTMLElement
+            ).getBoundingClientRect();
+            pickerPosition = {
+              top: rect.bottom + window.scrollY + 8,
+              left: rect.left + window.scrollX,
+            };
+            showBackgroundPicker = !showBackgroundPicker;
+          }
+        }}
+      ></button>
+      <input
+        type="text"
+        bind:value={local.backgroundColor}
+        class="text-white bg-[#00000000] text-sm truncate w-20 rounded"
+        maxlength="7"
+        placeholder={local.backgroundColor}
       />
     </div>
-
-    {#if isClient && showBackgroundPicker}
-      <div class="col-span-2 flex justify-center">
-        <hex-color-picker
-          color={local.backgroundColor}
-          on:color-changed={(e) => (local.backgroundColor = e.detail.value)}
-          style="width: 100%; max-width: 200px; height: 200px;"
-        />
-      </div>
-    {/if}
 
     <label class="self-center text-white col-span-2">Particle Colors</label>
 
@@ -134,7 +151,6 @@
             on:click={async (e) => {
               if (selectedParticleIndex === i) {
                 selectedParticleIndex = null;
-                console.log(selectedParticleIndex);
               } else {
                 const rect = (
                   e.currentTarget as HTMLElement
@@ -144,11 +160,16 @@
                   left: rect.left + window.scrollX,
                 };
                 selectedParticleIndex = i;
-                console.log(selectedParticleIndex);
               }
             }}
           />
-          <span class="text-white text-sm truncate">{color}</span>
+          <input
+            type="text"
+            bind:value={color}
+            class="text-white px-1 bg-[#00000000] text-sm w-16 rounded"
+            maxlength="7"
+            placeholder={color}
+          />
         </div>
       {/each}
     </div>
@@ -178,7 +199,11 @@
     </div>
 
     <label class="flex items-center text-white">
-      <input type="checkbox" bind:checked={local.showDebug} class="mr-2" />
+      <input
+        type="checkbox"
+        bind:checked={local.showDebug}
+        class="mr-2 text-white bg-[#00000000]"
+      />
       Show Debug
     </label>
     <!-- empty placeholder to keep grid shape -->
@@ -202,4 +227,22 @@
     }}
     onClose={() => (selectedParticleIndex = null)}
   />
+{/if}
+
+{#if isClient && showBackgroundPicker}
+  <ColorPopover
+    position={pickerPosition}
+    color={local.backgroundColor}
+    onColorChange={(val) => {
+      local.backgroundColor = val;
+    }}
+    onClose={() => (showBackgroundPicker = false)}
+  />
+  <!-- <div class="col-span-2 flex justify-center">
+    <hex-color-picker
+      color={local.backgroundColor}
+      on:color-changed={(e) => (local.backgroundColor = e.detail.value)}
+      style="width: 100%; max-width: 200px; height: 200px;"
+    />
+  </div> -->
 {/if}
