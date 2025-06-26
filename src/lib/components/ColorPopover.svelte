@@ -11,7 +11,7 @@
 
   // 2) internal reactive copy of color
   let internalColor = $state(color);
-  let hexColor = $state(internalColor);
+  let hexColor = $derived(internalColor);
 
   // 3) sync external → internal if parent changes `color`
   $effect(() => {

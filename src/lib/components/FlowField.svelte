@@ -3,6 +3,7 @@
   import { browser } from "$app/environment";
   import { Application, Container, Graphics, Point } from "pixi.js";
   import { settings, type FlowSettings } from "$lib/stores/settings";
+  import FlowSettingsPanel from "./FlowSettingsPanel.svelte";
 
   let app: Application | null = null;
 
@@ -11,10 +12,12 @@
   // Layers & data
   let arrowsLayer: Container;
   let particlesLayer: Container;
-  const particles: Graphics[] = [];
-  let grid: Cell[][] = [];
-  let rows: number = 0;
-  let cols: number = 0;
+  const particles: Graphics[] = $state([]);
+  let grid: Cell[][] = $state([]);
+  let rows: number = $state(0);
+  let cols: number = $state(0);
+  let width: number = $state(0);
+  let height: number = $state(0);
 
   let dragging = false;
   let lastMouse = new Point();
@@ -27,6 +30,7 @@
   }
 
   let cfg: FlowSettings;
+  let oldCfg: FlowSettings;
   let unsub = () => {};
 
   onMount(async () => {
@@ -66,7 +70,6 @@
     // inside onMount, AFTER you append `app.view`…
     flowField.interactive = true; // enable Pixi interaction
     flowField.hitArea = app.screen;
-    // app.renderer.interaction.cursorStyles.default = "crosshair";
 
     flowField
       .on("pointerdown", (e) => {
@@ -132,18 +135,7 @@
     }
   }
 
-  function resetScene() {
-    if (!app) return;
-    const width = app.screen.width;
-    const height = app.screen.height;
-
-    // remove previous
-    arrowsLayer.removeChildren();
-    particlesLayer.removeChildren();
-    particles.length = 0;
-
-    rows = Math.floor(height / cfg.cellSize);
-    cols = Math.floor(width / cfg.cellSize);
+  function setGrid() {
     // setup grid and debug arrows.
     for (let y = 0; y < rows; y++) {
       grid[y] = [];
@@ -167,7 +159,9 @@
         }
       }
     }
+  }
 
+  function setParticles() {
     // setup particles
     for (let i = 0; i < cfg.particleCount; i++) {
       let colorIndex = Math.floor(Math.random() * cfg.particleColors.length);
@@ -181,6 +175,23 @@
       particles.push(g);
       particlesLayer.addChild(g);
     }
+  }
+
+  function resetScene() {
+    if (!app) return;
+    width = app.screen.width;
+    height = app.screen.height;
+
+    // remove previous
+    arrowsLayer.removeChildren();
+    particlesLayer.removeChildren();
+    particles.length = 0;
+
+    rows = Math.floor(height / cfg.cellSize);
+    cols = Math.floor(width / cfg.cellSize);
+
+    setGrid();
+    setParticles();
 
     // Add ticker
     app.ticker.remove(update);
@@ -189,14 +200,20 @@
 
   function update(ticker: any) {
     if (!app) return;
-    const width = app.screen.width;
-    const height = app.screen.height;
 
-    // console.log("ticking");
+    width = app.screen.width;
+    height = app.screen.height;
+
     const fade = new Graphics();
-    fade
-      .rect(0, 0, width, height)
-      .fill({ color: cfg.backgroundColor, alpha: cfg.fadeAlpha });
+    if (cfg.clearBackground) {
+      fade
+        .rect(0, 0, width, height)
+        .fill({ color: cfg.backgroundColor, alpha: 1 });
+    } else {
+      fade
+        .rect(0, 0, width, height)
+        .fill({ color: cfg.backgroundColor, alpha: cfg.fadeAlpha });
+    }
     if (app) app.renderer.render(fade); // Overlay this fade layer
 
     cols = Math.floor(width / cfg.cellSize);
@@ -219,6 +236,8 @@
         p.y = Math.random() * height;
       }
     }
+
+    if (oldCfg != cfg) oldCfg = cfg;
   }
 
   onDestroy(() => {

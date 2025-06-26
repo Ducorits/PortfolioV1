@@ -13,6 +13,7 @@ export interface FlowSettings {
   showDebug: boolean;
   particleColors: string[];
   particleSize: number;
+  trailLength: number;
 }
 
 export const settings = writable<FlowSettings>({
@@ -26,4 +27,5 @@ export const settings = writable<FlowSettings>({
   backgroundColor: "#111122",
   clearBackground: false,
   particleSize: 1,
+  trailLength: 0,
 });

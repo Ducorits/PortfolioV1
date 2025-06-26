@@ -206,7 +206,16 @@
       />
       Show Debug
     </label>
-    <!-- empty placeholder to keep grid shape -->
+    <div></div>
+
+    <label class="flex items-center text-white">
+      <input
+        type="checkbox"
+        bind:checked={local.clearBackground}
+        class="mr-2 text-white bg-[#00000000]"
+      />
+      Clear Background
+    </label>
     <div></div>
   </div>
 
