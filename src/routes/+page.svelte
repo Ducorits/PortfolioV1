@@ -1,8 +1,9 @@
 <script>
   import Background from "$lib/components/Background.svelte";
+  import FlowField from "$lib/components/FlowField.svelte";
 </script>
 
-<Background />
+<FlowField />
 
 <svelte:head>
   <title>home</title>

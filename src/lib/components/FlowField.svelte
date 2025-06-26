@@ -67,6 +67,11 @@
     flowField.addChild(arrowsLayer, particlesLayer);
     app.stage.addChild(flowField);
 
+    unsub = settings.subscribe((newCfg) => {
+      cfg = newCfg;
+      resetScene();
+    });
+
     // inside onMount, AFTER you append `app.view`…
     flowField.interactive = true; // enable Pixi interaction
     flowField.hitArea = app.screen;
@@ -83,7 +88,7 @@
         dragging = false; // in case they release off‑canvas
       })
       .on("pointermove", (e) => {
-        if (!dragging) return;
+        if (!dragging || !cfg.enableMouseDrag) return;
         const mouse = e.global;
         const dragDir = new Point(mouse.x - lastMouse.x, mouse.y - lastMouse.y);
         const mag = Math.hypot(dragDir.x, dragDir.y);
@@ -94,11 +99,6 @@
           lastMouse.copyFrom(mouse);
         }
       });
-
-    unsub = settings.subscribe((newCfg) => {
-      cfg = newCfg;
-      resetScene();
-    });
     resetScene();
   });
 
@@ -229,8 +229,8 @@
       }
 
       let cell = grid[row][col];
-      p.x += cell.uVec.x * delta * 0.5;
-      p.y += cell.uVec.y * delta * 0.5;
+      p.x += cell.uVec.x * delta * cfg.particleSpeed;
+      p.y += cell.uVec.y * delta * cfg.particleSpeed;
       if (p.x < 0 || p.x >= width || p.y >= height || p.y < 0) {
         p.x = Math.random() * width;
         p.y = Math.random() * height;

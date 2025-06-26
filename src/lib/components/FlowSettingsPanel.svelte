@@ -38,7 +38,7 @@
 >
   <h2 class="text-2xl font-semibold mb-6 text-white">Flow Field Settings</h2>
 
-  <div class="grid grid-cols-2 gap-x-4 gap-y-6">
+  <div class="grid grid-cols-2 gap-x-4 gap-y-4">
     <label class="self-center text-white">Cell Size</label>
     <input
       type="number"
@@ -88,6 +88,15 @@
       bind:value={local.particleSize}
       min="0"
       max="10000"
+      class="w-full rounded text-white bg-[#00000000] px-2 py-1"
+    />
+
+    <label class="self-center text-white">Particle Speed</label>
+    <input
+      type="number"
+      bind:value={local.particleSpeed}
+      min="0"
+      max="10"
       class="w-full rounded text-white bg-[#00000000] px-2 py-1"
     />
 
@@ -215,6 +224,16 @@
         class="mr-2 text-white bg-[#00000000]"
       />
       Clear Background
+    </label>
+    <div></div>
+
+    <label class="flex items-center text-white">
+      <input
+        type="checkbox"
+        bind:checked={local.enableMouseDrag}
+        class="mr-2 text-white bg-[#00000000]"
+      />
+      Enable mouse dragging
     </label>
     <div></div>
   </div>
