@@ -6,6 +6,10 @@
   let projectId = $derived(selectedProject.id);
 </script>
 
+<svelte:head>
+  <title>codam-graph</title>
+</svelte:head>
+
 <div class="page">
   <CodamHolyGraph />
 

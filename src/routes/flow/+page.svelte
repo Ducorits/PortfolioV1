@@ -3,6 +3,10 @@
   import FlowSettingsPanel from "$lib/components/FlowSettingsPanel.svelte";
 </script>
 
+<svelte:head>
+  <title>flow field</title>
+</svelte:head>
+
 <div class="page">
   <FlowField />
   <FlowSettingsPanel />

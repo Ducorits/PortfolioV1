@@ -1,5 +1,4 @@
 <script>
-  import Background from "$lib/components/Background.svelte";
   import FlowField from "$lib/components/FlowField.svelte";
 </script>
 
@@ -21,7 +20,7 @@
       </h1>
     </div>
     <div
-      class="bg-[#111111] h-auto border border-violet-700 rounded-[20px] p-6 text-white w-auto"
+      class="bg-[#111111] h-auto border border-blue-700 rounded-[20px] p-6 text-white w-auto"
     >
       <p class="text-red-500 font-semibold mb-4">
         NOTICE:<br />
