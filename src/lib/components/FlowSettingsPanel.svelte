@@ -2,6 +2,7 @@
   import { settings, type FlowSettings } from "$lib/stores/settings";
   import { onMount, tick } from "svelte";
   import ColorPopover from "./ColorPopover.svelte";
+  import { Settings } from "@lucide/svelte";
 
   let open = false;
   let local: FlowSettings;
@@ -28,13 +29,15 @@
 <button
   class="fixed top-4 right-4 bg-[#111111] border-1 border-blue-600 text-white px-4 py-2 rounded shadow hover:bg-[#333333] transition cursor-pointer"
   on:click={() => (open = !open)}
+  title="settings"
 >
-  {open ? "Close ⚙️" : "Settings ⚙️"}
+  <!-- {open ? "Close" : "Settings"} -->
+  <Settings />
 </button>
 
 <aside
   class="fixed top-16 right-0 max-h-[calc(100vh-4rem)] h-full w-100 bg-black/50 backdrop-blur-lg p-6 overflow-y-auto rounded-bl-lg transform transition-transform duration-300 ease-in-out
-         {open ? 'translate-x-0' : 'translate-x-full'}"
+{open ? 'translate-x-0' : 'translate-x-full'}"
 >
   <h2 class="text-2xl font-semibold mb-6 text-white">Flow Field Settings</h2>
 

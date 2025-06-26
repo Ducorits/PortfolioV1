@@ -38,6 +38,7 @@
 		"vite": "^6.2.5"
 	},
 	"dependencies": {
+		"@lucide/svelte": "^0.523.0",
 		"pixi-viewport": "^6.0.3",
 		"pixi.js": "^8.9.2",
 		"vanilla-colorful": "^0.7.2"
