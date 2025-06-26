@@ -21,19 +21,23 @@
     >
       <a
         href="/codam-graph"
-        class="bg-[#111111] border-blue-500 hover:border-blue-300 hover:bg-[#1a1a1a] border-1 rounded-[20px] h-full p-4"
+        class="bg-[#111111] border-blue-600 hover:border-blue-300 hover:bg-[#1a1a1a] border-1 rounded-[20px] h-full p-4"
       >
         <p>Codam</p>
-        <img alt="hand" src="/assets/hand.jpg" class="rounded-md" />
+        <img
+          alt="codam graph"
+          src="/assets/codam-graph.png"
+          class="rounded-md"
+        />
       </a>
       <div
-        class="bg-[#111111] border-blue-500 hover:border-blue-300 hover:bg-[#1a1a1a] border-1 rounded-[20px] h-full p-4"
+        class="bg-[#111111] border-blue-600 hover:border-blue-300 hover:bg-[#1a1a1a] border-1 rounded-[20px] h-full p-4"
       >
         <p>Cub3d</p>
       </div>
       <a
         href="/flow"
-        class="bg-[#111111] border-blue-500 hover:border-blue-300 hover:bg-[#1a1a1a] border-1 rounded-[20px] h-full p-4"
+        class="bg-[#111111] border-blue-600 hover:border-blue-300 hover:bg-[#1a1a1a] border-1 rounded-[20px] h-full p-4"
       >
         <p>flowfield</p>
         <img

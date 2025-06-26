@@ -1,9 +1,8 @@
 <script lang="ts">
-
-	import { fade, fly } from 'svelte/transition';
-  import { onDestroy, onMount } from 'svelte';
-  let { close, projectId } = $props();
-  let projectHtml: string = $state('<p>Loading…</p>');
+  import { fade, fly } from "svelte/transition";
+  import { onDestroy, onMount } from "svelte";
+  let { close, projectId, open } = $props();
+  let projectHtml: string = $state("<p>Loading…</p>");
   let controller: AbortController;
 
   $effect(() => {
@@ -14,7 +13,7 @@
 
   async function loadProject(projectId: string) {
     controller?.abort();
-    controller = new AbortController;
+    controller = new AbortController();
 
     // 1) Build the URL to your static HTML file
     const url = `/projects/${projectId}.html`;
@@ -33,7 +32,7 @@
   }
 
   onMount(async () => {
-    controller = new AbortController;
+    controller = new AbortController();
   });
 
   onDestroy(() => {
@@ -41,14 +40,20 @@
   });
 </script>
 
-<aside transition:fly="{{ x: 300, duration: 500 }}" class="sheet flex-shrink bg-gray-900 border-l-2 border-[#42b9bc] pl-[20px] pt-[10px] text-white rounded-l-[40px]">
-  <div class="sticky top-0 bg-gray-900 z-10 flex items-center gap-4">
-    <button class="bg-[#42b9bc] w-[44px] h-[40px] rounded-full" onclick={close}>✕</button>
+<aside
+  transition:fly={{ x: 300 }}
+  class="sheet flex-shrink bg-[#111111]/60 backdrop-blur-lg pl-[20px] pt-[10px] text-white rounded-l-sm transform transition-transform duration-300 ease-in-out
+         {open ? 'translate-x-0' : 'translate-x-full'}"
+>
+  <div class="sticky top-0 z-10 flex items-center gap-4">
+    <button class="bg-gray-700 w-[44px] h-[40px] rounded-full" onclick={close}
+      >✕</button
+    >
     <h2 class="text-[40px] font-bold w-full text-center">{projectId}</h2>
   </div>
   <div class="content-wrapper text-center p-[10px] h-full w-full">
     {#key projectId}
-      <div in:fade="{{duration: 200}}">
+      <div in:fade={{ duration: 200 }}>
         {@html projectHtml}
       </div>
     {/key}
@@ -57,11 +62,12 @@
 
 <style>
   .sheet {
-    position: absolute;
-    top: 5%; right: 0;
+    position: fixed;
+    top: 4rem;
+    right: 0;
     width: 33%;
-    height: 95%;
-    overflow-y: auto;
-    box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+    height: calc(100vh - 4rem);
+    overflow-y: hidden;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
   }
 </style>

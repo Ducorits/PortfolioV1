@@ -69,7 +69,7 @@
       type: "radial",
       colorStops: [
         { offset: 0, color: "#111155" },
-        { offset: 1, color: "#111122" },
+        { offset: 0.8, color: "#111122" },
       ],
     });
 
