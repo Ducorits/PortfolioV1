@@ -10,7 +10,7 @@
   <div
     class="flex flex-col xl:flex-row w-full px-10 md:px-0 md:w-2/3 h-full justify-center sm:justify-between gap-[40px]"
   >
-    <div class="w-110 flex">
+    <div class="flex">
       <h1
         class="text-gray-300 text-[60px] md:text-[100px] leading-[100px] md:leading-[120px]"
       >
