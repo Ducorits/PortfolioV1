@@ -4,6 +4,7 @@
   import { Application, Container, Graphics, Point } from "pixi.js";
   import { settings, type FlowSettings } from "$lib/stores/settings";
   import FlowSettingsPanel from "./FlowSettingsPanel.svelte";
+  import { Proportions } from "@lucide/svelte";
 
   let app: Application | null = null;
 
@@ -21,6 +22,24 @@
 
   let dragging = false;
   let lastMouse = new Point();
+
+  const defaultCfg: FlowSettings = {
+    cellSize: 10,
+    curve: 1,
+    zoom: 0.05,
+    particleCount: 1000,
+    fadeAlpha: 0.02,
+    showDebug: false,
+    particleColors: ["#1155aa", "#4455bb", "#4499ee"],
+    backgroundColor: "#111122",
+    clearBackground: false,
+    particleSize: 1,
+    enableMouseDrag: false,
+    particleSpeed: 0.5,
+    trailLength: 0,
+  };
+
+  let { useDefaultSettings = false } = $props();
 
   interface Cell {
     x: number;
@@ -67,10 +86,22 @@
     flowField.addChild(arrowsLayer, particlesLayer);
     app.stage.addChild(flowField);
 
-    unsub = settings.subscribe((newCfg) => {
-      cfg = newCfg;
+    if (useDefaultSettings) {
+      cfg = defaultCfg;
       resetScene();
-    });
+    } else {
+      unsub = settings.subscribe((newCfg) => {
+        cfg = newCfg;
+        resetScene();
+      });
+    }
+
+    const handleResize = () => {
+      if (app) {
+        resetScene();
+      }
+    };
+    window.addEventListener("resize", handleResize);
 
     // inside onMount, AFTER you append `app.view`…
     flowField.interactive = true; // enable Pixi interaction
@@ -243,6 +274,7 @@
   onDestroy(() => {
     unsub();
     if (app) {
+      // window.removeEventListener("resize", handleResize);
       app.destroy(true);
       app = null;
     }

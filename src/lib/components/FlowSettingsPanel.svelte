@@ -6,6 +6,7 @@
 
   let open = false;
   let local: FlowSettings;
+  let defaultCfg: FlowSettings;
   let isClient = false;
   let showBackgroundPicker = false;
   let particlePickerStates: boolean[] = [];
@@ -17,12 +18,31 @@
     isClient = true;
     particlePickerStates = local.particleColors.map(() => false);
 
+    defaultCfg = {
+      cellSize: 10,
+      curve: 1,
+      zoom: 0.05,
+      particleCount: 1000,
+      fadeAlpha: 0.02,
+      showDebug: false,
+      particleColors: ["#1155aa", "#4455bb", "#4499ee"],
+      backgroundColor: "#111122",
+      clearBackground: false,
+      particleSize: 1,
+      enableMouseDrag: false,
+      particleSpeed: 0.5,
+      trailLength: 0,
+    };
+
     import("vanilla-colorful/hex-color-picker.js");
     return () => unsubscribe();
   });
 
   function apply() {
     settings.set(local);
+  }
+  function reset() {
+    settings.set(defaultCfg);
   }
 </script>
 
@@ -31,7 +51,6 @@
   on:click={() => (open = !open)}
   title="settings"
 >
-  <!-- {open ? "Close" : "Settings"} -->
   <Settings />
 </button>
 
@@ -41,7 +60,7 @@
 >
   <h2 class="text-2xl font-semibold mb-6 text-white">Flow Field Settings</h2>
 
-  <div class="grid grid-cols-2 gap-x-4 gap-y-4">
+  <div class="grid grid-cols-2 gap-x-4 gap-y-2">
     <label class="self-center text-white">Cell Size</label>
     <input
       type="number"
@@ -247,6 +266,12 @@
   >
     Apply
   </button>
+  <button
+    on:click={reset}
+    class="mt-8 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-400 transition"
+  >
+    Reset
+  </button>
 </aside>
 
 {#if isClient && selectedParticleIndex != null}
@@ -269,11 +294,4 @@
     }}
     onClose={() => (showBackgroundPicker = false)}
   />
-  <!-- <div class="col-span-2 flex justify-center">
-    <hex-color-picker
-      color={local.backgroundColor}
-      on:color-changed={(e) => (local.backgroundColor = e.detail.value)}
-      style="width: 100%; max-width: 200px; height: 200px;"
-    />
-  </div> -->
 {/if}

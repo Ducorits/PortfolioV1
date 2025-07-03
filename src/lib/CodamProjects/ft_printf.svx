@@ -1,0 +1,30 @@
+---
+title: "ft_printf"
+difficulty: "medium"
+tags: ["C", "ft_printf", "low-level"]
+---
+
+> A foundational C library written from scratch.
+
+## 📝 Goal
+
+Recreate many of the standard C library functions, such as:
+
+- `ft_strlen`
+- `ft_strcpy`
+- `ft_memcpy`
+- `ft_atoi`
+- `ft_split`
+
+…and many others!
+
+## 🧠 Skills
+
+- Pointer arithmetic
+- Memory management (heap vs. stack)
+- Buffer safety
+- Header file structure
+
+Bottom text
+
+[View the project on GitHub](https://github.com/Ducorits/libft)

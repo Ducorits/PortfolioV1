@@ -2,7 +2,7 @@
   import FlowField from "$lib/components/FlowField.svelte";
 </script>
 
-<FlowField />
+<FlowField useDefaultSettings={true} />
 
 <svelte:head>
   <title>home</title>
@@ -18,24 +18,6 @@
       >
         ducorits.
       </h1>
-    </div>
-    <div
-      class="bg-[#111111] h-auto border border-blue-700 rounded-[20px] p-6 text-white w-auto"
-    >
-      <p class="text-red-500 font-semibold mb-4">
-        NOTICE:<br />
-        I am currently working on this site, everything is subject to change!
-      </p>
-      <p class="mb-2">
-        Glad to find you looking at my portfolio<br />
-        Take a look around!
-      </p>
-      <p class="mb-2">
-        I am a software engineer that likes to make pretty things :D
-      </p>
-      <p class="italic">
-        P.S. if you don't see a nice flowfield, reload the page!
-      </p>
     </div>
   </div>
 </div>
