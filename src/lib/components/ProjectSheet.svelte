@@ -30,11 +30,11 @@
 
 <aside
   transition:fly={{ x: 300 }}
-  class="sheet flex-shrink bg-[#111111]/60 backdrop-blur-lg pl-[20px] pt-[10px] text-white rounded-l-sm transform transition-transform duration-300 ease-in-out
+  class="sheet flex-shrink w-full h-full md:w-1/3 bg-black/50 backdrop-blur-lg pl-[20px] pt-[10px] text-white rounded-l-sm transform transition-transform duration-300 ease-in-out
          {open ? 'translate-x-0' : 'translate-x-full'}"
 >
   <div class="sticky top-0 z-10 flex items-center gap-4">
-    <button class="bg-gray-700 w-[44px] h-[40px] rounded-full" onclick={close}
+    <button class="bg-gray-700 w-[40px] h-[38px] rounded-full" onclick={close}
       >✕</button
     >
     <h2 class="text-[40px] font-bold w-full text-center">{projectId}</h2>
@@ -51,10 +51,8 @@
 <style>
   .sheet {
     position: fixed;
-    top: 4rem;
+    top: 0;
     right: 0;
-    width: 33%;
-    height: calc(100vh - 4rem);
     overflow-y: hidden;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
   }
