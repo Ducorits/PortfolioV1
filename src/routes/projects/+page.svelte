@@ -6,7 +6,7 @@
   <title>projects</title>
 </svelte:head>
 
-<div class="flex w-full h-full pt-10 justify-center">
+<div class="flex w-full h-full pt-10 pb-10 justify-center">
   <div
     class="flex flex-col xl:flex-row w-full px-10 md:px-0 md:w-2/3 h-full justify-center sm:justify-between gap-[40px]"
   >
