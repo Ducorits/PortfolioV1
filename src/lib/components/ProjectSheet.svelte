@@ -34,8 +34,9 @@
          {open ? 'translate-x-0' : 'translate-x-full'}"
 >
   <div class="sticky top-0 z-10 flex items-center gap-4">
-    <button class="bg-gray-700 w-[40px] h-[38px] rounded-full" onclick={close}
-      >✕</button
+    <button
+      class="bg-gray-700 w-[40px] h-[38px] rounded-full fixed"
+      onclick={close}>✕</button
     >
     <h2 class="text-[40px] font-bold w-full text-center">{projectId}</h2>
   </div>
