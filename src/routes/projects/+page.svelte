@@ -18,7 +18,7 @@
       </h1>
     </div>
     <div
-      class="grid [grid-template-columns:repeat(auto-fit,minmax(400px,1fr))] gap-[40px] md:mt-10 rounded-[20px] w-full h-full text-white"
+      class="grid sm:[grid-template-columns:repeat(auto-fit,minmax(400px,1fr))] gap-[40px] md:mt-10 rounded-[20px] w-full h-full text-white"
     >
       <ProjectCard
         href="/codam-graph"
