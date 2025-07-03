@@ -20,7 +20,7 @@
     <div
       class="flex flex-col gap-6 md:mt-10 bg-[#111111] border-blue-600 border rounded-[20px] h-full p-6 w-full text-gray-200"
     >
-      <h2 class="text-gray-300 text-[30px] sm:text-[40px] leading-tight">
+      <h2 class="text-gray-300 text-[28px] sm:text-[40px] leading-tight">
         Duco Ritsema van Eck
       </h2>
       <p>
