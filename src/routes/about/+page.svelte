@@ -8,10 +8,12 @@
 
 <div class="flex w-full h-full pt-10 pb-10 justify-center">
   <div
-    class="flex flex-col xl:flex-row w-full px-6 md:px-0 sm:w-2/3 h-full justify-center sm:justify-between gap-10"
+    class="flex flex-col xl:flex-row w-full px-6 md:px-0 md:w-2/3 h-full justify-center md:justify-between gap-10"
   >
     <div class="w-full xl:w-auto flex">
-      <h1 class="text-gray-300 text-[60px] sm:text-[100px] leading-[1.1]">
+      <h1
+        class="text-gray-300 text-[60px] md:text-[100px] leading-[100px] md:leading-[120px]"
+      >
         about.
       </h1>
     </div>
