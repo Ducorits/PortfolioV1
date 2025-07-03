@@ -48,7 +48,7 @@
         Not everything I do needs a purpose, but most of it starts with
         curiosity.
       </p>
-      <div class="flex flex-row text-[24px] gap-3 pt-4">
+      <div class="flex flex-row text-[24px] gap-2 pt-4">
         <p>Links:</p>
         <a
           href="https://github.com/your-username"
