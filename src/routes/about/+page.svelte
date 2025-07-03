@@ -51,7 +51,7 @@
       <div class="flex flex-row text-[24px] gap-2 pt-4">
         <p>Links:</p>
         <a
-          href="https://github.com/your-username"
+          href="https://github.com/Ducorits"
           target="_blank"
           rel="noopener noreferrer"
           class="flex flex-row text-gray-500 hover:text-violet-400 text-[24px] transition-colors"
@@ -60,7 +60,7 @@
           <Github size={28} />
         </a>
         <a
-          href="https://linkedin.com/in/your-profile"
+          href="https://www.linkedin.com/in/duco-ritsema-van-eck-b8399b239/"
           target="_blank"
           rel="noopener noreferrer"
           class="flex flex-row text-gray-500 hover:text-violet-400 text-[24px] transition-colors"
