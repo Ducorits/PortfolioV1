@@ -31,7 +31,7 @@
       </p>
     {/if}
     <div
-      class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center p-4"
+      class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4"
     >
       <p class="text-white text-lg">{description}</p>
     </div>
@@ -53,7 +53,7 @@
     {/if}
 
     <div
-      class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center p-4"
+      class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4"
     >
       <p class="text-white text-lg">{description}</p>
     </div>

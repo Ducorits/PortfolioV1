@@ -28,13 +28,13 @@
       />
       <ProjectCard
         title="Cub3d"
-        description="A C based visual project imitating the wolfenstein 3D engine."
+        description="A C based project imitating the wolfenstein 3D engine."
       />
       <ProjectCard
         href="/flow"
         image="/assets/small-flowfield.png"
         title="Flow Field"
-        description="A Typescript flow field using PixiJS, also the background for the homepage"
+        description="A Typescript flow field using PixiJS, used as background for the homepage"
       />
     </div>
   </div>
