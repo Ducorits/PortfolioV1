@@ -26,13 +26,13 @@
         — sometimes technical, sometimes silly.<br /> I studied at
         <a
           href="https://www.codam.nl/en/about-codam/"
-          class="underline text-gray-500 hover:text-blue-100"
+          class="underline text-gray-500 hover:text-violet-400 transition-colors"
         >
           Codam Coding College
         </a>, part of the
         <a
           href="https://www.42network.org/"
-          class="underline text-gray-500 hover:text-blue-100"
+          class="underline text-gray-500 hover:text-violet-400 transition-colors"
         >
           42 network
         </a>, where we learn by doing.
@@ -52,7 +52,7 @@
           href="https://github.com/your-username"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex flex-row text-gray-500 hover:text-blue-200 text-[24px] transition-colors"
+          class="flex flex-row text-gray-500 hover:text-violet-400 text-[24px] transition-colors"
         >
           <p>Github_</p>
           <Github size={28} />
@@ -61,7 +61,7 @@
           href="https://linkedin.com/in/your-profile"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex flex-row text-gray-500 hover:text-blue-200 text-[24px] transition-colors"
+          class="flex flex-row text-gray-500 hover:text-violet-400 text-[24px] transition-colors"
         >
           <p>Linked_</p>
           <Linkedin size={28} />
