@@ -6,7 +6,7 @@
   <title>about</title>
 </svelte:head>
 
-<div class="flex w-full h-full pt-10 justify-center">
+<div class="flex w-full h-full pt-10 pb-10 justify-center">
   <div
     class="flex flex-col xl:flex-row w-full px-6 md:px-0 sm:w-2/3 h-full justify-center sm:justify-between gap-10"
   >
@@ -46,7 +46,7 @@
         Not everything I do needs a purpose, but most of it starts with
         curiosity.
       </p>
-      <div class="flex flex-row text-[24px] gap-4 pt-4">
+      <div class="flex flex-row text-[24px] gap-3 pt-4">
         <p>Links:</p>
         <a
           href="https://github.com/your-username"
