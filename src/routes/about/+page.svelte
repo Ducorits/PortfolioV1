@@ -16,7 +16,7 @@
       </h1>
     </div>
     <div
-      class="flex flex-col gap-6 md:mt-10 bg-[#111111] border-blue-600 border rounded-[20px] h-full p-6 w-full text-gray-300"
+      class="flex flex-col gap-6 md:mt-10 bg-[#111111] border-blue-600 border rounded-[20px] h-full p-6 w-full text-gray-200"
     >
       <h2 class="text-gray-300 text-[30px] sm:text-[40px] leading-tight">
         Duco Ritsema van Eck
@@ -26,13 +26,13 @@
         — sometimes technical, sometimes silly.<br /> I studied at
         <a
           href="https://www.codam.nl/en/about-codam/"
-          class="underline text-blue-300 hover:text-blue-100"
+          class="underline text-gray-500 hover:text-blue-100"
         >
           Codam Coding College
         </a>, part of the
         <a
           href="https://www.42network.org/"
-          class="underline text-blue-300 hover:text-blue-100"
+          class="underline text-gray-500 hover:text-blue-100"
         >
           42 network
         </a>, where we learn by doing.
@@ -52,7 +52,7 @@
           href="https://github.com/your-username"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex flex-row text-gray-400 hover:text-blue-200 text-[24px] transition-colors"
+          class="flex flex-row text-gray-500 hover:text-blue-200 text-[24px] transition-colors"
         >
           <p>Github_</p>
           <Github size={28} />
@@ -61,7 +61,7 @@
           href="https://linkedin.com/in/your-profile"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex flex-row text-gray-400 hover:text-blue-200 text-[24px] transition-colors"
+          class="flex flex-row text-gray-500 hover:text-blue-200 text-[24px] transition-colors"
         >
           <p>Linked_</p>
           <Linkedin size={28} />
