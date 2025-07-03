@@ -1,4 +1,5 @@
 <script>
+  import ProjectCard from "$lib/components/ProjectCard.svelte";
 </script>
 
 <svelte:head>
@@ -7,45 +8,34 @@
 
 <div class="flex w-full h-full pt-10 justify-center">
   <div
-    class="flex flex-col xl:flex-row w-full px-10 md:px-0 sm:w-2/3 h-full justify-center sm:justify-between gap-[40px]"
+    class="flex flex-col xl:flex-row w-full px-10 md:px-0 md:w-2/3 h-full justify-center sm:justify-between gap-[40px]"
   >
     <div class="w-110 flex">
       <h1
-        class="text-gray-300 text-[60px] sm:text-[100px] leading-[100px] sm:leading-[120px]"
+        class="text-gray-300 text-[60px] md:text-[100px] leading-[100px] md:leading-[120px]"
       >
         projects.
       </h1>
     </div>
     <div
-      class="grid 2xl:grid-cols-2 gap-[40px] md:mt-10 rounded-[20px] w-full md:w-2/3 h-full text-white"
+      class="grid [grid-template-columns:repeat(auto-fit,minmax(400px,1fr))] gap-[40px] md:mt-10 rounded-[20px] w-full h-full text-white"
     >
-      <a
+      <ProjectCard
         href="/codam-graph"
-        class="bg-[#111111] border-blue-600 hover:border-blue-300 hover:bg-[#1a1a1a] border-1 rounded-[20px] h-full p-4"
-      >
-        <p>Codam</p>
-        <img
-          alt="codam graph"
-          src="/assets/codam-graph.png"
-          class="rounded-md"
-        />
-      </a>
-      <div
-        class="bg-[#111111] border-blue-600 hover:border-blue-300 hover:bg-[#1a1a1a] border-1 rounded-[20px] h-full p-4"
-      >
-        <p>Cub3d</p>
-      </div>
-      <a
+        image="/assets/codam-graph.png"
+        title="Codam graph"
+        description="A cool project visualizing Codam’s curriculum with an interactive graph."
+      />
+      <ProjectCard
+        title="Cub3d"
+        description="A C based visual project imitating the wolfenstein 3D engine."
+      />
+      <ProjectCard
         href="/flow"
-        class="bg-[#111111] border-blue-600 hover:border-blue-300 hover:bg-[#1a1a1a] border-1 rounded-[20px] h-full p-4"
-      >
-        <p>flowfield</p>
-        <img
-          alt="flowfield"
-          src="/assets/small-flowfield.png"
-          class="rounded-md"
-        />
-      </a>
+        image="/assets/small-flowfield.png"
+        title="Flow Field"
+        description="A Typescript flow field using PixiJS, also the background for the homepage"
+      />
     </div>
   </div>
 </div>

@@ -21,7 +21,7 @@ export class CodamProjectBubble extends Container {
       text: text,
       style: {
         fontFamily: "Arial",
-        fontSize: 48,
+        fontSize: 150,
         fontWeight: "bold",
         fill: 0xffffff,
         align: "left",
