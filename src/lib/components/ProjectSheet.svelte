@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import { onDestroy, onMount } from "svelte";
-  import { projectMap } from "$lib/projectContent";
+  import { codamProjectMap } from "$lib/projectContent";
 
   let { close, projectId, open }: { close: any; projectId: string; open: any } =
     $props();
@@ -10,12 +10,18 @@
   let ProjectComponent: typeof import("svelte").SvelteComponent | null =
     $state(null);
 
+  let OldProjectComponent: typeof import("svelte").SvelteComponent | null =
+    $state(null);
+
+  let localProjectId = $state("");
+
   $effect(() => {
     if (projectId) {
-      ProjectComponent = projectMap[projectId] ?? null;
-      console.log(ProjectComponent);
+      ProjectComponent = codamProjectMap[projectId] ?? null;
+      OldProjectComponent = ProjectComponent;
+      localProjectId = projectId;
     } else {
-      ProjectComponent = null;
+      ProjectComponent = OldProjectComponent;
     }
   });
 
@@ -35,12 +41,17 @@
 >
   <div class="sticky top-0 z-10 flex items-center gap-4">
     <button
-      class="bg-gray-700 w-[40px] h-[38px] rounded-full fixed"
-      onclick={close}>✕</button
+      onclick={close}
+      class="fixed z-50 w-10 h-10 rounded-full bg-black/80 text-white items-center justify-center border-1 border-blue-600"
+      aria-label="Close project sheet"
     >
-    <h2 class="text-[40px] font-bold w-full text-center">{projectId}</h2>
+      <span class="text-lg font-bold">✕</span>
+    </button>
+    <h2 class="text-[40px] font-bold w-full h-auto text-center">
+      {localProjectId}
+    </h2>
   </div>
-  <div class="content-wrapper prose prose-invert text-white">
+  <div class="content-wrapper pb-40 prose prose-invert text-white">
     {#if ProjectComponent}
       <ProjectComponent />
     {:else}

@@ -6,23 +6,26 @@ tags: ["C", "libft", "low-level"]
 
 > A foundational C library written from scratch.
 
-## 📝 Goal
+## 📘 Project Overview
 
-Recreate many of the standard C library functions, such as:
+`libft` is one of the foundational projects at 42, where students are tasked with recreating a subset of the standard C library functions. The goal is to develop a solid understanding of low-level programming concepts, as well as to practice writing clean, reusable, and well-documented code.
 
-- `ft_strlen`
-- `ft_strcpy`
-- `ft_memcpy`
-- `ft_atoi`
-- `ft_split`
+The project includes:
 
-…and many others!
+- Reimplementing common `libc` functions such as `memset`, `strcpy`, `strdup`, `atoi`, etc.
+- Handling memory manipulation and string operations
+- Writing custom utility functions like `ft_split`, `ft_itoa`, and more
+- Using consistent naming conventions and adhering to strict code formatting
+- Creating a static library (`libft.a`) to be reused in future projects
 
-## 🧠 Skills
+## 🧠 What I Learned
 
-- Pointer arithmetic
-- Memory management (heap vs. stack)
-- Buffer safety
-- Header file structure
+Working on `libft` taught me the fundamentals of memory management, pointer arithmetic, and string handling. Since I had to recreate common functions without relying on the standard library, I learned how they work under the hood. This project significantly improved my ability to:
+
+- Write robust and error-free C code
+- Understand buffer overflows and prevent undefined behavior
+- Break down complex functionality into simple, testable units
+- Work within strict coding standards and project constraints
+
 
 [View the project on GitHub](https://github.com/Ducorits/libft)

@@ -1,0 +1,18 @@
+This is a recreation of the 42 Holy Graph. Each bubble represents a project and clicking on it reveals more information.
+
+Each ring represents a different "rank" of projects, starting with Libft and moving outwards, the outer rings being the most advanced projects.
+
+There are more projects in the original curriculum than shown here, these are the ones I have done.
+
+The C projects at Codam follow strict code norms enforced by \`norminette\`. These include max 25 lines per function and 5 functions per file, encouraging clean and modular code.
+
+C++ projects are more flexible, allowing more expressive and advanced programming patterns.
+
+
+**About 42 / Codam**
+
+42 is a global software engineering school with a peer-to-peer, project-based curriculum. There are no teachers or formal classes — you learn by doing and by collaborating. Codam is the Amsterdam branch.
+
+---
+
+This graph was made using pixiJS and svelte.
