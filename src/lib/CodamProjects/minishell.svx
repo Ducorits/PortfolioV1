@@ -1,0 +1,54 @@
+> As beautiful as a shell.
+
+**Minishell** was our attempt at recreating a simplified Bash-like shell. While not a full terminal emulator, it taught me a ton about **processes**, **file descriptors**, **signals**, and how shells manage input and output under the hood.
+
+The goal was to handle basic command execution, piping, redirection, and environment management — all within a responsive and interactive shell environment.
+
+## 💡 What It Does
+
+- Displays a custom prompt using `readline`
+- Parses and executes shell commands (e.g. `ls -la | grep foo > out.txt`)
+- Supports:
+  - Pipes (`|`)
+  - Redirections: `>`, `<`, `>>`, `<<` (heredoc)
+  - Environment variables (`$VAR`, `$?`)
+  - Quoting logic for `'single'` and `"double"` quotes
+- Implements the following **built-in commands**:
+  - `echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`
+- Handles:
+  - `ctrl-C`: clears the current line and shows a new prompt
+  - `ctrl-D`: exits the shell
+  - `ctrl-\`: ignored like in Bash
+
+## 🛠️ System Calls & Tools Used
+
+Relies on a range of system-level functions:
+- `fork`, `execve`, `pipe`, `dup2`, `waitpid`
+- `signal`, `sigaction` for proper signal handling
+- `readline` and `add_history` for prompt and history features
+
+Also uses:
+- A single `global` variable (only allowed to store the received signal)
+- A custom parser to correctly handle nested quotes, tokenization, and operators
+
+## 🧪 Redirection Support
+
+| Symbol | Description                         |
+|--------|-------------------------------------|
+| `<`    | Redirect stdin from a file          |
+| `>`    | Redirect stdout to a file (truncate)|
+| `>>`   | Redirect stdout in append mode      |
+| `<<`   | Heredoc: read input until delimiter |
+
+## 🧼 Signal Handling
+
+Interactive behavior is modeled closely after Bash:
+- Prompt refresh on `SIGINT` (ctrl-C)
+- Graceful shutdown on EOF (ctrl-D)
+- Ignore `SIGQUIT` (ctrl-\)
+
+---
+
+This project required meticulous memory management, parser design, and synchronization between parent/child processes. It was as challenging as it was rewarding — a real deep dive into how Linux shells operate under the surface.
+
+<a href="https://github.com/Ducorits/minishell" target="_blank" rel="noopener">View the project on GitHub</a>

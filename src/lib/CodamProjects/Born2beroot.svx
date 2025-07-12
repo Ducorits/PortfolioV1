@@ -1,0 +1,36 @@
+
+> This is your world
+
+`Born2beRoot` is a system administration project from the 42 curriculum. It introduces students to virtualization and server configuration by having them create and secure their own Linux virtual machine from scratch.
+
+The main objective is to configure a minimal yet fully operational Debian or Rocky Linux server within a VirtualBox (or UTM) environment. Students must enforce strong security policies, configure user and group permissions, and automate system monitoring — all without any graphical interface.
+
+Key requirements include:
+
+- Using **VirtualBox** (or **UTM**)
+- Setting up **LVM with encrypted partitions**
+- Installing and configuring **UFW** (or `firewalld` for Rocky)
+- Configuring **SSH on port 4242** (no root login)
+- Creating a **strong password policy**
+- Restricting and logging **sudo** usage
+- Writing a `monitoring.sh` script to display system stats at regular intervals
+- Complying with system hardening practices like **AppArmor** or **SELinux**
+
+Optional bonuses include setting up services like a WordPress website using `lighttpd`, `MariaDB`, and `PHP`.
+
+## 🧠 What I Learned
+
+This project was a deep dive into **Linux server administration** and **security best practices**. It taught me:
+
+- **How to provision and secure a headless Linux server**: Without a GUI, every configuration — from partitioning to firewall rules — was managed through the command line, which significantly improved my terminal fluency.
+- **How LVM and encryption work in practice**: Creating encrypted logical volumes helped me understand how modern Linux systems manage storage securely and flexibly.
+- **User and group management**: I learned how to set up users with specific roles, restrict permissions, and enforce good practices through policies (like password complexity, expiry, and sudo constraints).
+- **Service configuration**: I configured and hardened essential services like `ssh`, `sudo`, and `cron`, learning how system daemons interact and how to monitor them effectively.
+- **System monitoring and automation**: My `monitoring.sh` script was an opportunity to learn `bash` scripting, `cron`, and real-time system data collection.
+- **Virtualization logistics**: Managing virtual disk signatures and ensuring system reproducibility in a secure, auditable way added another layer of real-world relevance.
+
+This project made me much more confident in handling real server environments. It bridged the gap between programming and deployment, teaching me not just how to write code, but how to run and protect it in production-like conditions.
+
+---
+There is no repository for this project. I have made a guide for it though:
+<a href="https://dritsema.notion.site/Born2beRoot-9bc73ca6aaeb4e96a9c67b36576aceb0" target="_blank" rel="noopener">View it here</a>

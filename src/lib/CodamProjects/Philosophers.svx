@@ -1,0 +1,45 @@
+> I never thought philosophy would be so deadly.
+
+**Philosophers** introduced me to the wonderful chaos of multithreading. Simulating the famous dining philosophers problem, I had to coordinate shared resources (forks) between threads (philosophers) using **mutexes** — all while avoiding deadlocks and starvation.
+
+For each philospher there is only one fork at the table, but to eat they need *two*.
+Each philosopher switches between thinking, eating, and sleeping, but can only eat if they’ve acquired *both* forks. With the added challenge of printing precise state changes and detecting deaths within tight timing windows, the project tested both my **concurrency control** and **real-time logging**.
+
+## 🧠 Core Concepts
+
+- **Threads** for each philosopher (`pthread_create`)
+- **Mutexes** for fork access (`pthread_mutex_*`)
+- **Timing and starvation** logic with millisecond precision
+- **Shared data** safely accessed via synchronization primitives
+- **State logging** with strict formatting:
+  `timestamp_in_ms X is eating`
+  `timestamp_in_ms X died`
+  (Messages must not overlap!)
+
+## 🧪 Arguments
+
+```bash
+./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
+```
+
+- All times are in milliseconds.
+- Simulation ends if a philosopher dies *or* (optionally) when all have eaten enough.
+
+## 🔐 Synchronization Strategy
+
+- One mutex per fork to prevent concurrent access.
+- Additional mutexes to:
+  - Prevent race conditions when writing logs.
+  - Safely read/update simulation state and meal times.
+- Death is detected by regularly checking `time_since_last_meal`.
+
+## 💥 Challenges Faced
+
+- Preventing **deadlocks** when multiple philosophers reach for forks at once.
+- Implementing accurate **millisecond-level timing** using `gettimeofday` and `usleep`.
+- Ensuring logs don't overlap in output, especially during death detection.
+- Managing **clean shutdowns** when the simulation ends.
+
+This project taught me how fragile concurrent systems can be — and how elegant proper synchronization can feel when it all finally works.
+
+<a href="https://github.com/Ducorits/philosophers" target="_blank" rel="noopener">View the project on GitHub</a>

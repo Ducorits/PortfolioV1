@@ -6,8 +6,6 @@ tags: ["C", "libft", "low-level"]
 
 > A foundational C library written from scratch.
 
-## 📘 Project Overview
-
 `libft` is one of the foundational projects at 42, where students are tasked with recreating a subset of the standard C library functions. The goal is to develop a solid understanding of low-level programming concepts, as well as to practice writing clean, reusable, and well-documented code.
 
 The project includes:
@@ -28,4 +26,4 @@ Working on `libft` taught me the fundamentals of memory management, pointer arit
 - Work within strict coding standards and project constraints
 
 
-[View the project on GitHub](https://github.com/Ducorits/libft)
+<a href="https://github.com/Ducorits/libft" target="_blank" rel="noopener">View the project on GitHub</a>

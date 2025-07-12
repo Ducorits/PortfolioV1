@@ -1,0 +1,59 @@
+> This project involves representing a wireframe landscape in 3D
+
+## 🌄 Project Overview
+
+**FDF** (short for *Fil De Fer*, French for "wireframe") is a graphical C project focused on rendering 3D landscapes using a 2D projection. This program takes a map of 3D points (from a `.fdf` file) and draws the corresponding wireframe model using the **MLX42** graphics library.
+
+The key goals of the project were:
+- Read a 2D grid of elevation points from a file.
+- Project 3D coordinates onto a 2D isometric plane.
+- Draw the result as a wireframe model in a smooth, interactive window.
+
+This project was my first encounter with graphical rendering in C, and a stepping stone to understanding how 3D scenes are drawn on a 2D screen.
+
+## 🧠 What I Learned
+
+Working on FDF taught me a wide range of low-level and graphics-focused skills:
+
+### 📐 Isometric Projection
+- I learned how to map 3D `(x, y, z)` coordinates into 2D screen space using **isometric projection** formulas.
+- This involved understanding linear transformations, scaling, and centering the scene dynamically.
+
+### 🎨 MLX42
+- This was my introduction to **MLX42**, a lightweight X11-based graphics library.
+- I handled pixel manipulation, window management, and event handling (keyboard, window close button, etc.).
+
+### 🔄 Matrix Parsing
+- Reading `.fdf` files involved dynamic memory allocation and custom parsing.
+- I reused utilities like `get_next_line()` and `ft_split()` from libft for efficient file handling.
+
+### 📉 Rendering Efficiency
+- I implemented **Bresenham’s line algorithm** to draw lines between each point without performance-heavy floating-point operations.
+
+### 🧼 Resource Management
+- I paid special attention to freeing all heap-allocated memory and handling exits cleanly upon ESC key or window close events.
+
+## ✨ Bonus Features (Optional)
+I also explored additional functionality:
+- Zooming in and out
+- Model translation and rotation
+- Parallel projection toggle
+- Perspective projection
+- Matrix transformations for dynamic scene manipulation
+
+These additions taught me about real-time input handling and matrix transformations in 2D graphics pipelines.
+
+## 🖼️ Example File Format
+
+A `.fdf` map file contains space-separated integers representing altitudes. Here's an example:
+
+```
+0 0 0 0
+0 5 5 0
+0 5 5 0
+0 0 0 0
+```
+
+Each value corresponds to a 3D point in `(x, y, z)` space, where `z` is the altitude. These points are connected into a grid of lines to form the wireframe model.
+
+<a href="https://github.com/Ducorits/FdF" target="_blank" rel="noopener">View the project on GitHub</a>

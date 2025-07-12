@@ -1,0 +1,62 @@
+> Because `swap_push` just doesn’t feel as natural.
+
+**Push_swap** was my first taste of constrained sorting under pressure. The goal: take an unsorted list of integers and sort it using only a small set of predefined stack instructions (`sa`, `pb`, `ra`, etc.). The twist? You're judged on how *few* moves you make.
+
+This project taught me to think in terms of **algorithmic efficiency**, not just correctness. I explored multiple sorting strategies (radix sort, hardcoded solutions for small sets, chunk-based partitioning and path finding) and tuned them for performance — all while obeying strict operation limits. Funnily enough, we were only required to find the shortest sequence of operations, not the most efficient sorting algorithm. This led to some interesting trade-offs!
+
+## 📚 Key Concepts
+
+- **Two stacks**: `a` starts filled with input integers, `b` starts empty.
+- **Instruction set**: Only allowed to manipulate the stacks using 11 predefined operations (`sa`, `pb`, `rr`, etc.).
+- **Constraints**:
+  - No global variables.
+  - Minimal instruction output.
+  - Handle errors (duplicates, non-integers, overflows).
+- **Goal**: Output the *shortest* valid instruction sequence to fully sort stack `a`.
+
+## ⚙️ Algorithms & Techniques Used
+
+- **A pathfinding algorithm** while not the fastest in terms of complexity, was used to find the shortest path to sort the stack.
+- **Hardcoded logic** (for 3–5 elements): optimized patterns for minimal instructions.
+- **Index mapping**: normalized values to simplify logic (e.g., replace input integers with their 0-based sorted index).
+- **Chunking strategy**: break input into ranges and move in/out of `b` stack in order.
+
+## 🧪 Sample Usage
+
+```sh
+./push_swap 2 1 3 6 5 8
+```
+
+Might output:
+```
+sa
+pb
+pb
+pb
+sa
+pa
+pa
+pa
+```
+
+```sh
+./push_swap 0 one 2 3
+Error
+```
+
+## 🏁 Benchmarks Hit
+
+To pass and receive full marks:
+- Sorted 100 numbers in \< 700 operations.
+- Sorted 500 numbers in \< 5500 operations.
+
+These were verified using the provided `checker_OS` tool, ensuring correctness *and* efficiency.
+
+## 🧨 Errors Handled
+
+- Duplicate integers
+- Non-numeric arguments
+- Integer overflows
+- Invalid instructions in `checker` mode
+
+<a href="https://github.com/Ducorits/push_swap" target="_blank" rel="noopener">View the project on GitHub</a>

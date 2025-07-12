@@ -1,0 +1,63 @@
+> Pipe it, baby! 🎶
+
+**Pipex** is a C project designed to mimic the behavior of a simple shell pipeline. Specifically, it replicates the behavior of:
+
+`< file1 cmd1 | cmd2 > file2`
+
+This project deepened my understanding of **UNIX processes**, **pipes**, and **file descriptor management** by re-implementing this pipeline behavior from scratch using only low-level system calls.
+
+## 🧠 What I Learned
+
+### 🧵 UNIX Pipes
+- Implemented inter-process communication using `pipe()`, enabling the output of `cmd1` to flow directly into the input of `cmd2`.
+
+### 👯 Process Management
+- Used `fork()` to create child processes that execute `cmd1` and `cmd2`.
+- Managed process execution with `execve()` and synchronized using `waitpid()`.
+
+### 📂 File Descriptor Duplication
+- Applied `dup2()` to redirect standard input and output in each process, mimicking shell redirection `<`, `|`, and `>`.
+
+### 📄 Error Handling and Robustness
+- Carefully handled edge cases such as:
+  - Command not found
+  - File not accessible
+  - Incorrect arguments
+- Made the program behave like a shell pipeline regarding exit codes and error messages.
+
+### 🧼 Memory and Resource Management
+- Freed all dynamically allocated memory and closed all opened file descriptors.
+- Ensured zero memory leaks or dangling resources.
+
+## 🧪 Usage Examples
+
+**Example 1:**
+```
+./pipex infile "ls -l" "wc -l" outfile
+```
+Equivalent shell behavior:
+```
+< infile ls -l | wc -l > outfile
+```
+
+**Example 2:**
+```
+./pipex infile "grep hello" "wc -w" outfile
+```
+Equivalent shell behavior:
+```
+< infile grep hello | wc -w > outfile
+```
+
+## 🔍 System Calls Used
+
+| Function   | Purpose                             |
+|------------|--------------------------------------|
+| `pipe()`   | Create pipe file descriptors         |
+| `fork()`   | Create new process                   |
+| `dup2()`   | Redirect stdin/stdout                |
+| `execve()` | Replace process image with command   |
+| `open()`   | Read/write files                     |
+| `waitpid()`| Wait for child processes             |
+
+<a href="https://github.com/Ducorits/pipex" target="_blank" rel="noopener">View the project on GitHub</a>

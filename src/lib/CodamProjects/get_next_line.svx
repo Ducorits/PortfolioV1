@@ -1,0 +1,27 @@
+> and the next, and the next, and the next...
+
+`get_next_line` is a core C project from the 42 curriculum. Its goal is to implement a function that reads and returns a single line from a file descriptor, handling one line at a time with repeated calls. The challenge lies in managing partial reads, memory allocation, and the internal state of the read operation without using global variables or external libraries.
+
+Requirements include:
+
+- Implementing the function `char *get_next_line(int fd);`
+- Using only allowed functions: `read`, `malloc`, and `free`
+- Supporting all kinds of input (files, standard input, etc.)
+- Reading as little data as possible and returning lines as soon as a `\n` is encountered
+- Handling buffer sizes dynamically via the `BUFFER_SIZE` macro
+- Ensuring proper memory management and avoiding leaks
+
+## 🧠 What I Learned
+
+This project sharpened my understanding of file I/O in C, especially in constrained environments where only low-level tools are available.
+
+Key takeaways:
+
+- **Static variables**: I learned how to preserve state between function calls without resorting to global variables. This was critical to allow partial buffer reuse across multiple `get_next_line` calls.
+- **Dynamic memory management**: Handling strings across buffers taught me how to carefully allocate, reallocate, and free memory without leaking or crashing.
+- **Edge case handling**: The function had to gracefully manage empty files, EOF without a newline, and various `BUFFER_SIZE` values — even extreme ones like 1 or 10,000.
+- **Input stream behavior**: I developed a deeper understanding of how file descriptors work and how different input sources (e.g., standard input vs files) behave during reading operations.
+
+`get_next_line` may seem like a small utility, but implementing it from scratch taught me to think more like a systems programmer: precise, careful, and always aware of the resources I'm using.
+
+<a href="https://github.com/Ducorits/get_next_line" target="_blank" rel="noopener">View the project on GitHub</a>

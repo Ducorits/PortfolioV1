@@ -4,27 +4,31 @@ difficulty: "medium"
 tags: ["C", "ft_printf", "low-level"]
 ---
 
-> A foundational C library written from scratch.
+> Why use what you can write yourself?
 
-## 📝 Goal
+`ft_printf` is a core project from the 42 curriculum that challenges students to reimplement the standard `printf()` function from the C library. While simple in appearance, `printf()` supports many features under the hood — including variadic arguments, type conversions, and formatting. This project is a practical exercise in writing low-level, robust, and extensible code in pure C.
 
-Recreate many of the standard C library functions, such as:
+To complete the mandatory part of the project, I had to:
 
-- `ft_strlen`
-- `ft_strcpy`
-- `ft_memcpy`
-- `ft_atoi`
-- `ft_split`
+- Implement a function `int ft_printf(const char *format, ...);`
+- Handle all of the following format specifiers: `%c`, `%s`, `%p`, `%d`, `%i`, `%u`, `%x`, `%X`, and `%%`
+- Carefully match the behavior of the original `printf()` for edge cases and invalid input
+- Manage memory allocations responsibly (no leaks)
+- Write the code in compliance with the strict **norminette** coding standard
+- Package the function into a static library `libftprintf.a`
 
-…and many others!
+## 🧠 What I Learned
 
-## 🧠 Skills
+Working on `ft_printf` gave me hands-on experience with some of the more advanced features of the C language:
 
-- Pointer arithmetic
-- Memory management (heap vs. stack)
-- Buffer safety
-- Header file structure
+- **Variadic functions**: Using macros like `va_start`, `va_arg`, and `va_end`, I learned how to process an unknown number of arguments safely and effectively.
+- **Format parsing**: I built a small parsing engine to read format strings and extract type and flag information, which required a clean and modular codebase.
+- **Type-safe conversions**: Re-implementing type printing functions for pointers, unsigned integers, and hexadecimals reinforced my understanding of type representations in C.
+- **Memory and error handling**: Ensuring zero memory leaks, no crashes, and handling invalid inputs made me write more defensive and testable code.
+- **Design under constraint**: Adhering to norminette rules (max 25 lines per function, 5 functions per file) pushed me to split logic thoughtfully and reuse code efficiently.
 
-Bottom text
+Ultimately, this project taught me to approach problems methodically, think in terms of small building blocks, and produce high-quality, maintainable C code — all of which are critical skills for systems-level programming.
 
-[View the project on GitHub](https://github.com/Ducorits/libft)
+---
+
+<a href="https://github.com/Ducorits/ft_printf" target="_blank" rel="noopener">View the project on GitHub</a>
