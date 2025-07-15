@@ -28,12 +28,16 @@
         — sometimes technical, sometimes silly.<br /> I studied at
         <a
           href="https://www.codam.nl/en/about-codam/"
+          target="_blank"
+          rel="noopener noreferrer"
           class="underline text-gray-500 hover:text-violet-400 transition-colors"
         >
           Codam Coding College
         </a>, part of the
         <a
           href="https://www.42network.org/"
+          target="_blank"
+          rel="noopener noreferrer"
           class="underline text-gray-500 hover:text-violet-400 transition-colors"
         >
           42 network
