@@ -1,7 +1,5 @@
 > Dots and lines! Whoop Whoop!
 
-## 🎯 Overview
-
 **FDF** (short for _Fil De Fer_, French for "wireframe") is a graphical C project focused on rendering 3D landscapes using a 2D projection. This program takes a map of 3D points (from a `.fdf` file) and draws the corresponding wireframe model using the **MLX42** graphics library.
 
 The key goals of the project were:

@@ -27,10 +27,6 @@
         description="A cool project visualizing Codam’s curriculum with an interactive graph."
       />
       <ProjectCard
-        title="Cub3d"
-        description="A C based project imitating the wolfenstein 3D engine."
-      />
-      <ProjectCard
         href="/flow"
         image="/assets/small-flowfield.png"
         title="Flow Field"

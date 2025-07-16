@@ -1,7 +1,5 @@
 > Not nearly enough!
 
-## 🎯 Overview
-
 This set of modules builds on foundational knowledge to cover advanced C++ features, including complex templates, operator overloading, move semantics, and modern best practices. These skills prepare you for high-performance and maintainable software design.
 
 ---

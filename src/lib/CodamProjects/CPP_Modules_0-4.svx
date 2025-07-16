@@ -1,7 +1,5 @@
 > Because C is not enough
 
-## 🎯 C++ Modules Overview (Modules 0 to 4)
-
 This bundle covers the foundational and intermediate C++ skills developed through the core 42 C++ modules at Codam. It represents a solid progression from basic syntax to advanced OOP and templates, preparing for complex software development.
 
 ---

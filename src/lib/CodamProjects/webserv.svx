@@ -1,8 +1,6 @@
 > I think my aunt had HTTP, absolutely terrible condition, but she was a great server.
 
-## Building a HTTP Server from Scratch
-
-**Webserv** is a deep-dive into the world of web infrastructure. The task: implement your own fully-functional HTTP server similar to <a href="https://nginx.org/" target="_blank" rel="noopener">Nginx</a>, without using external libraries or frameworks. The goal is to serve static content, support file uploads, and handle multiple clients through a scalable event loop.
+**Webserv** is a deep-dive into the world of web infrastructure. The task: implement your own fully-functional HTTP server similar to <a href="https://nginx.org/" target="_blank" rel="noopener">Nginx</a> from scratch, without using external libraries or frameworks. The goal is to serve static content, support file uploads, and handle multiple clients through a scalable event loop.
 
 ---
 
