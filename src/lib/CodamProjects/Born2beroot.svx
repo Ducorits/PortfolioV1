@@ -1,11 +1,10 @@
-
 > This is your world
 
 `Born2beRoot` is a system administration project from the 42 curriculum. It introduces students to virtualization and server configuration by having them create and secure their own Linux virtual machine from scratch.
 
 The main objective is to configure a minimal yet fully operational Debian or Rocky Linux server within a VirtualBox (or UTM) environment. Students must enforce strong security policies, configure user and group permissions, and automate system monitoring — all without any graphical interface.
 
-Key requirements include:
+## Key requirements include:
 
 - Using **VirtualBox** (or **UTM**)
 - Setting up **LVM with encrypted partitions**
@@ -32,5 +31,6 @@ This project was a deep dive into **Linux server administration** and **security
 This project made me much more confident in handling real server environments. It bridged the gap between programming and deployment, teaching me not just how to write code, but how to run and protect it in production-like conditions.
 
 ---
+
 There is no repository for this project. I have made a guide for it though:
 <a href="https://dritsema.notion.site/Born2beRoot-9bc73ca6aaeb4e96a9c67b36576aceb0" target="_blank" rel="noopener">View it here</a>

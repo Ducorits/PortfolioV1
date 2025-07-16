@@ -1,0 +1,27 @@
+## 🎯 Overview
+
+This set of modules builds on foundational knowledge to cover advanced C++ features, including complex templates, operator overloading, move semantics, and modern best practices. These skills prepare you for high-performance and maintainable software design.
+
+---
+
+## 📚 Modules Summary
+
+| Module       | Key Skills & Concepts Learned                                                                                                                                                               |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Module 5** | - Advanced operator overloading and custom behaviors<br>- Deepening understanding of polymorphism and inheritance<br>- Working with multiple classes interacting together                   |
+| **Module 6** | - Implementing move semantics for efficient resource transfer<br>- Understanding rvalue references and perfect forwarding<br>- Optimizing code with modern C++ techniques                   |
+| **Module 7** | - Standard Template Library (STL) introduction<br>- Using vectors, lists, maps, and iterators<br>- Understanding container properties and algorithms                                        |
+| **Module 8** | - Complex template metaprogramming<br>- Template specialization and SFINAE (Substitution Failure Is Not An Error)<br>- Traits and compile-time programming                                  |
+| **Module 9** | - Exception safety and robust error handling<br>- Smart pointers and RAII (Resource Acquisition Is Initialization)<br>- Multi-threading basics and synchronization concepts (if applicable) |
+
+---
+
+## 🧠 What I Learned
+
+- Mastery of modern C++ features like move semantics and advanced templates
+- Proficient with STL containers and algorithms for efficient coding
+- Ability to write safe, maintainable code with smart pointers and exception handling
+- Exposure to compile-time programming and template metaprogramming techniques
+- Prepared to work on high-performance, complex software projects
+
+---

@@ -8,7 +8,7 @@ tags: ["C", "libft", "low-level"]
 
 `libft` is one of the foundational projects at 42, where students are tasked with recreating a subset of the standard C library functions. The goal is to develop a solid understanding of low-level programming concepts, as well as to practice writing clean, reusable, and well-documented code.
 
-The project includes:
+## The project includes:
 
 - Reimplementing common `libc` functions such as `memset`, `strcpy`, `strdup`, `atoi`, etc.
 - Handling memory manipulation and string operations
@@ -24,6 +24,5 @@ Working on `libft` taught me the fundamentals of memory management, pointer arit
 - Understand buffer overflows and prevent undefined behavior
 - Break down complex functionality into simple, testable units
 - Work within strict coding standards and project constraints
-
 
 <a href="https://github.com/Ducorits/libft" target="_blank" rel="noopener">View the project on GitHub</a>

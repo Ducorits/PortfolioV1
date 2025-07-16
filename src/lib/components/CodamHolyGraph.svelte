@@ -118,7 +118,7 @@
     // Ring 4
     const cub3d = new CodamProjectBubble("cub3d");
     const net_practice = new CodamProjectBubble("NetPractice");
-    const cpp0_4 = new CodamProjectBubble("CPP Modules 0-4");
+    const cpp0_4 = new CodamProjectBubble("CPP_Modules_0-4");
     ring_4.addOrbital(cub3d);
     ring_4.addOrbital(net_practice);
     ring_4.addOrbital(cpp0_4);
@@ -126,7 +126,7 @@
     // Ring 5
     const webserv = new CodamProjectBubble("webserv");
     const inception = new CodamProjectBubble("Inception");
-    const cpp5_9 = new CodamProjectBubble("CPP Modules 5-9");
+    const cpp5_9 = new CodamProjectBubble("CPP_Modules_5-9");
     ring_5.addOrbital(webserv);
     ring_5.addOrbital(inception);
     ring_5.addOrbital(cpp5_9);

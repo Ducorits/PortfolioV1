@@ -1,0 +1,94 @@
+> Ping... Pong... ping...
+
+## 🏓 A Full-Stack Multiplayer Pong Experience
+
+**ft_transcendence** is a capstone project that brings together frontend, backend, and real-time communication skills into one modern web application. The challenge: build a fully-functional multiplayer **Pong** game with features like matchmaking, user authentication, and a responsive UI.
+
+---
+
+## 🌐 Stack Overview
+
+| Layer       | Technology                    | Role                             |
+| ----------- | ----------------------------- | -------------------------------- |
+| Frontend    | **React**                     | SPA UI + Game View               |
+| Backend     | **NestJS** (TypeScript)       | REST API, WebSocket Gateway      |
+| Game Engine | **ThreeJS** + **MatterJS**    | 3D Pong rendering + physics      |
+| Real-Time   | **WebSockets**                | Multiplayer, 1 socket per player |
+| Auth        | 42 OAuth + JWT                | Secure user sessions             |
+| Deployment  | **Docker** + `docker-compose` | Containerized services           |
+
+---
+
+## 🎮 My Role
+
+As the lead on **game development** and **real-time infrastructure**, I focused on delivering a seamless, performant in-browser Pong experience.
+
+### 🧩 Game Development
+
+- Built the entire Pong game using **ThreeJS** for smooth WebGL-rendered visuals.
+- Integrated **MatterJS** for realistic 2D physics and paddle/ball collisions.
+- Supported both 1v1 matches and spectator view.
+
+### 🔌 Real-Time Multiplayer
+
+- Architected the WebSocket flow using **NestJS Gateways**.
+- Ensured **one persistent socket per player** to avoid desyncs and ghost connections.
+- Built a matchmaking queue that pairs available users into games automatically.
+- Implemented a reconnection strategy in case of dropped sockets.
+
+---
+
+## 🔐 Additional Features (Team-Wide)
+
+While I focused on the game logic, the full project also included:
+
+- 🛡️ **User Authentication** with 42 OAuth and JWTs
+- 👥 **Friends list**, direct invites, and chat
+- 🎨 **Custom avatars** and simple profile UI
+- 🧱 Modular architecture with REST and WebSocket integration
+- 🐳 Dockerized stack with persistent DB (e.g., PostgreSQL)
+
+---
+
+## 🧠 What I Learned
+
+- Writing a full WebSocket matchmaking system with NestJS
+- Managing state across multiple real-time players
+- Preventing socket abuse and duplicate connections
+- WebGL rendering and hitbox physics in the browser
+- Working with React in a live game loop (managing re-renders and performance)
+- Coordinating backend and frontend teams in a real-world team project
+- Using Docker Compose to run frontend, backend, and DB services in sync
+
+---
+
+## 🚀 Project Goals
+
+- Build a secure, real-time multiplayer web app
+- Learn modern TypeScript-based full-stack development
+- Create a smooth user experience combining REST and WebSockets
+- Collaborate effectively using Git, Docker, and CI practices
+
+---
+
+_I am not actually very proud of the end product, but I am proud of the process and the skills I learned while working on this project. It was a great experience to work with a team and build something from scratch that was both fun and challenging._
+
+<a href="git@github.com:The-Friendly-Ghost/Transcendence.git" target="_blank" rel="noopener">View the project on GitHub</a>
+
+_(Disclaimer: you cannot run this project, it only worked on the Codam network)_
+
+---
+
+## 🛠️ Technologies Used
+
+<div class="not-prose">
+  <div class="flex flex-wrap gap-2">
+    <img class="block" src="https://img.shields.io/badge/-TypeScript-3178c6?logo=typescript&logoColor=white" alt="TypeScript badge">
+    <img class="block" src="https://img.shields.io/badge/-NestJS-e0234e?logo=nestjs&logoColor=white" alt="NestJS badge">
+    <img class="block" src="https://img.shields.io/badge/-React-61dafb?logo=react&logoColor=black" alt="React badge">
+    <img class="block" src="https://img.shields.io/badge/-WebSockets-35495e?logo=websocket&logoColor=white" alt="WebSocket badge">
+    <img class="block" src="https://img.shields.io/badge/-Docker-2496ed?logo=docker&logoColor=white" alt="Docker badge">
+    <img class="block" src="https://img.shields.io/badge/-Three.js-000000?logo=three.js&logoColor=white" alt="Three.js badge">
+    <img class="block" src="https://img.shields.io/badge/-Matter.js-6e4a7e" alt="Matter.js badge">
+  </div>
+</div>

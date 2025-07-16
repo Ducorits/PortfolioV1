@@ -4,10 +4,11 @@ Each ring represents a different "rank" of projects, starting with Libft and mov
 
 There are more projects in the original curriculum than shown here, these are the ones I have done.
 
+**The Norme**
+
 The C projects at Codam follow strict code norms enforced by \`norminette\`. These include max 25 lines per function and 5 functions per file, encouraging clean and modular code.
 
 C++ projects are more flexible, allowing more expressive and advanced programming patterns.
-
 
 **About 42 / Codam**
 

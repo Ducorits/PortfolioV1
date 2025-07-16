@@ -2,7 +2,7 @@
 
 `get_next_line` is a core C project from the 42 curriculum. Its goal is to implement a function that reads and returns a single line from a file descriptor, handling one line at a time with repeated calls. The challenge lies in managing partial reads, memory allocation, and the internal state of the read operation without using global variables or external libraries.
 
-Requirements include:
+## Requirements include:
 
 - Implementing the function `char *get_next_line(int fd);`
 - Using only allowed functions: `read`, `malloc`, and `free`

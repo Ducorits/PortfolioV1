@@ -1,0 +1,46 @@
+> "Networking: because even computers need to talk things out."
+
+**NetPractice** is a practical and interactive introduction to the fundamentals of computer networking. This project involved fixing broken network configurations across ten levels using a browser-based simulator.
+
+Rather than writing code, this challenge was about understanding **IP addressing**, **subnetting**, and **how routing works** — all the hidden wiring behind how devices communicate.
+
+## 🌐 What It Involved
+
+- Learning how **TCP/IP addressing** works
+- Manually configuring small networks (hosts, switches, routers) using simulated topologies
+- Debugging misconfigured IPs, subnets, and routing tables
+- Validating connectivity through the interface’s live feedback and logs
+- Exporting working configurations after each level
+
+Each level presented a broken network with a specific goal — for example:
+
+- Make Host A reachable from Host B
+- Route traffic through multiple routers
+- Correct subnet mismatches or gateway misconfigurations
+
+## 🧠 Skills & Tools
+
+While there was no code to write, the project built core intuition around:
+
+- IP classes and binary subnet math
+- Default gateways
+- Routing across multiple hops
+- How hosts interact via ARP and routing tables
+
+## 📦 Deliverables
+
+- Ten `.cfg` files (one for each level), exported from the simulator
+- Each file captures the state of your corrected network setup
+- Submitted in a Git repository as per the guidelines
+
+## 🕒 Evaluation
+
+During the defense:
+
+- You're given 15 minutes to solve 3 randomly selected levels from scratch
+- No internet or external tools allowed (except basic calculator like `bc`)
+- Success depends on quick IP math and correct routing instincts
+
+---
+
+Although deceptively simple, this project gave me a rock-solid foundation in practical networking concepts — a skillset that’s useful whether you're debugging Docker containers or deploying across cloud instances.

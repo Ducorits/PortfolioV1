@@ -1,0 +1,92 @@
+**Inception** is a system administration project that challenges you to build a complete multi-service infrastructure using **Docker**, entirely within a virtual machine. No pre-built images allowed — everything is configured and built from scratch using **Dockerfiles**, **Docker Compose**, and best practices.
+
+## 🎯 Overview
+
+The goal is to create a fully containerized environment featuring:
+
+- **NGINX** (TLSv1.2 or TLSv1.3 only)
+- **WordPress + php-fpm** (no NGINX inside)
+- **MariaDB**
+- **Volumes** to persist both:
+  - WordPress files
+  - WordPress database
+- All services communicating through a private Docker network
+- Configured domain name: `login.42.fr` → pointing to your local IP
+
+Everything must be deployed via:
+
+- A \`\` at the project root
+- A fully working \`\` under `srcs/`
+- Custom **Dockerfiles per service**
+
+## 🛠️ Requirements & Constraints
+
+- ✅ Must be developed inside a **VM**
+- ✅ Each service = 1 container
+- ✅ Use **Alpine** or **Debian** base images (latest tag forbidden)
+- ✅ Use **environment variables** (and preferably `.env` + Docker secrets)
+- ✅ Auto-restart containers on failure
+- ❌ No `tail -f`, `sleep infinity`, or any fake-daemon tricks
+- ❌ No `network: host`, `--link`, or legacy links
+
+Your services **must be actual daemons** — no shell hacks allowed. Learn about **PID 1 behavior** in containers and how to run services properly.
+
+### Example login-based configuration:
+
+```
+DOMAIN_NAME=duco.42.fr
+MYSQL_USER=codam_user
+MYSQL_PASSWORD=supersecret
+```
+
+## 🗂️ File & Directory Structure
+
+Your project must include:
+
+```
+.
+├── Makefile
+├── srcs/
+│   ├── docker-compose.yml
+│   ├── .env
+│   └── requirements/
+│       ├── nginx/
+│       ├── wordpress/
+│       ├── mariadb/
+│       └── tools/
+├── secrets/
+│   ├── db_password.txt
+│   ├── db_root_password.txt
+│   └── credentials.txt
+```
+
+All credentials must be stored **outside Git** and ignored via `.gitignore`.
+
+## 🔐 Security Focus
+
+- Passwords and credentials must **never be hardcoded**
+- Use environment variables and `.env` files
+- Secrets should be mounted properly, not exposed
+- Use HTTPS only (NGINX on port **443**, with TLSv1.2+)
+
+## 🌐 Services Summary
+
+| Container     | What it Does                  | Notes                             |
+| ------------- | ----------------------------- | --------------------------------- |
+| **NGINX**     | Terminates TLS, reverse proxy | No PHP or WordPress in this one   |
+| **MariaDB**   | WordPress DB backend          | Must contain two users, one admin |
+| **WordPress** | PHP-FPM only, no NGINX        | Mounted files + connected DB      |
+
+---
+
+## ✅ What I Learned
+
+- Docker networking & volume management
+- Container security and daemonization best practices
+- TLS/SSL setup and HTTPS-only configuration
+- Automation through Makefiles and Compose
+- Managing secrets and environment configuration
+- Real-world NGINX reverse proxy setups
+- Writing modular, clean infrastructure from scratch
+
+> This is where DevOps begins — not with scripts, but with understanding why _not_ to use `tail -f`.

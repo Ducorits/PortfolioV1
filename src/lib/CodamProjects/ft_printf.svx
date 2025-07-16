@@ -8,7 +8,7 @@ tags: ["C", "ft_printf", "low-level"]
 
 `ft_printf` is a core project from the 42 curriculum that challenges students to reimplement the standard `printf()` function from the C library. While simple in appearance, `printf()` supports many features under the hood — including variadic arguments, type conversions, and formatting. This project is a practical exercise in writing low-level, robust, and extensible code in pure C.
 
-To complete the mandatory part of the project, I had to:
+## Requirements include:
 
 - Implement a function `int ft_printf(const char *format, ...);`
 - Handle all of the following format specifiers: `%c`, `%s`, `%p`, `%d`, `%i`, `%u`, `%x`, `%X`, and `%%`

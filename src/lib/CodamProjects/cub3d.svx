@@ -1,0 +1,66 @@
+> cub3D: the project where you shoot rays, not bullets.
+
+**cub3D** is a raycasting project inspired by the legendary _Wolfenstein 3D_. It's not a game remake — it’s a low-level rendering engine that simulates a 3D environment using **2D math**, handcrafted in **C** using **MLX42**, a modern minimalist graphics library.
+
+This project pushed me to combine math, graphics, event handling, and architecture into a clean first-person engine.
+
+I actually liked this project so much that I did it 2 times: once just for Codam and then again for the fun of it. Both times I worked with other students, which made it even more enjoyable.
+
+## 🕹️ What It Involved
+
+- Implementing a **raycaster** from scratch (no OpenGL, no SDL — just math)
+- Loading a `.cub` map with textures, floor/ceiling colors, and player orientation
+- Rendering a 3D scene in a 2D window using vertical strip projection
+- Handling player movement with **WASD** and rotation via **arrow keys**
+- Implementing collision with walls
+- Parsing a custom scene format with:
+  - Wall textures (`NO`, `SO`, `WE`, `EA`)
+  - RGB colors for floor/ceiling (`F`, `C`)
+  - Maze-like 2D map with `1`, `0`, and player start position (`N`, `S`, `E`, `W`)
+- Clean exits on **ESC key** or window close (cross)
+- Handling invalid maps with meaningful errors
+
+## 🔢 Core Concepts
+
+- **Raycasting** math (angle stepping, fish-eye correction)
+- **2D grid parsing** into a valid scene graph
+- **Texture projection** with wall-face detection (N/S/E/W)
+- Event handling using MLX42 (input, window, frame updates)
+- Basic color parsing and pixel drawing to frame buffer
+- Time-stepped rendering using delta time for smooth movement
+
+## 📦 Deliverables
+
+- Executable: `cub3D`
+- Input: A `.cub` scene file
+- Clean Makefile with rules: `all`, `clean`, `fclean`, `re`, `bonus`
+- Project written entirely in C, following strict Norme rules
+
+## 🚀 Bonus Features (if mandatory is perfect)
+
+If all base requirements are flawlessly met, the following extras can be implemented:
+
+- Collision detection (prevent walking through walls)
+- A minimap (2D overview in a HUD)
+- Doors that open/close interactively
+- Mouse-based viewpoint control
+- Animated sprites or enemies
+- HUDs with health bar, weapons, or status overlays
+
+> _Don't waste time recreating DOOM just yet, but you’re now dangerously close._
+
+## 🎮 Showcase Examples
+
+### Telestein3D/Cub3d
+
+![](https://raw.githubusercontent.com/fvan-wij/Cub3d_Telestein3D/refs/heads/main/telestein.gif)
+Telestein3D (based on 42's project 'Cub3d') is a demo of a horror game that can be explored in first-person similar to the game Wolfenstein 3D.
+
+### Play Telestein3D in the browser
+
+Click [here](https://fvan-wij.github.io/Telestein3D_WebAssembly) to play Telestein3D in the browser
+<a href="https://github.com/fvan-wij/Cub3d_Telestein3D" target="_blank" rel="noopener">View the project on GitHub</a>
+
+---
+
+This project wasn’t just about rendering graphics — it taught me to **blend math, state management, input events, and performance awareness** in a way that few CLI tools can. It’s where abstract C code starts to feel like a living, visual system — and MLX42 makes the whole process far more approachable and robust.

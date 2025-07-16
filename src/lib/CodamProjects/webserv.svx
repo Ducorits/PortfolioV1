@@ -1,0 +1,64 @@
+## 🌐 Building a HTTP Server from Scratch
+
+**Webserv** is a deep-dive into the world of web infrastructure. The task: implement your own fully-functional HTTP server similar to <a href="https://nginx.org/" target="_blank" rel="noopener">Nginx</a>, without using external libraries or frameworks. The goal is to serve static content, support file uploads, and handle multiple clients through a scalable event loop.
+
+---
+
+## 🎯 Overview
+
+| Area             | Details                                                                      |
+| ---------------- | ---------------------------------------------------------------------------- |
+| Language         | **Modern C++**                                                               |
+| OS Compatibility | Linux & macOS (platform-specific I/O differences handled)                    |
+| Network Model    | Non-blocking sockets + `poll()`-based I/O                                    |
+| HTTP Support     | Core HTTP methods: `GET`, `POST`, and `DELETE`                               |
+| Key Features     | Custom config file, file upload, CGI support, multi-port support             |
+| Constraints      | No use of forks (except for CGI), no external libraries, no real web servers |
+
+---
+
+## ⚙️ My Contributions
+
+I focused on designing and implementing the I/O core loop of the server, ensuring stable, efficient handling of many clients at once.
+
+### 🧠 Scalable Context Management
+
+We implemented a centralized `poll()` loop that handled all file descriptors through a clean abstraction layer. Each descriptor had a corresponding command object responsible for handling its behavior. This allowed the server to scale gracefully while keeping logic modular and testable.
+
+---
+
+## 📄 Key Features Implemented
+
+- 📁 Serving static HTML, CSS, and JS content
+- 📝 File uploads via HTTP POST
+- 🔥 CGI execution for dynamic scripts (e.g., PHP or Python)
+- 🧠 Custom configuration file parsing
+- 🧾 Accurate HTTP response codes
+- 🧼 Default error page support
+- 🌐 Multi-port listening with routing support
+
+---
+
+## 🔐 Robustness
+
+- Full non-blocking I/O via `poll()`
+- One centralized I/O loop
+- Clean object-oriented abstraction for file descriptor handling
+- Strict error management: no unexpected crashes or hangs
+
+---
+
+## 💡 What I Learned
+
+- How HTTP really works, down to the byte
+- Scalable I/O strategies with system-level APIs
+- Command pattern for decoupling context logic
+- Writing and parsing configuration files
+- Handling signals, timeouts, and client disconnects
+- Serving static and dynamic content from scratch
+
+---
+
+> Webserv is when I finally understood HTTP — not just how it works, but **why** it works the way it does.
+
+<a href="https://github.com/fvan-wij/webserver" target="_blank" rel="noopener">View the project on GitHub</a>
