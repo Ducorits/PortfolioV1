@@ -47,8 +47,10 @@
   style="clip-path: circle({$scale *
     130}% at var(--clip-x) var(--clip-y)); transition: clip-path 0.6s;"
 >
-  <div class="overlay w-full h-full text-white p-8 pointer-events-auto">
-    <div class="max-w-2xl mx-auto prose prose-invert">
+  <div
+    class="overlay top-30 sm:top-0 w-full h-full text-white p-8 pointer-events-auto"
+  >
+    <div class="max-w-2xl mx-auto prose prose-invert overflow-auto">
       <h2 class="text-3xl font-semibold mb-4">{title}</h2>
       {#if ProjectInfo}
         <ProjectInfo />
