@@ -1,4 +1,4 @@
-> "Networking: because even computers need to talk things out."
+> Networking: because even computers need to talk things out.
 
 **NetPractice** is a practical and interactive introduction to the fundamentals of computer networking. This project involved fixing broken network configurations across ten levels using a browser-based simulator.
 
@@ -14,7 +14,9 @@ Rather than writing code, this challenge was about understanding **IP addressing
 
 Each level presented a broken network with a specific goal — for example:
 
-- Make Host A reachable from Host B
+![](assets/NetPractice.png)
+
+- Make all Hosts reach each other
 - Route traffic through multiple routers
 - Correct subnet mismatches or gateway misconfigurations
 

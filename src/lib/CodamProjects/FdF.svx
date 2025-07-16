@@ -1,4 +1,4 @@
-> This project involves representing a wireframe landscape in 3D
+> Dots and lines! Whoop Whoop!
 
 ## 🎯 Overview
 

@@ -1,6 +1,6 @@
 > Ping... Pong... ping...
 
-## 🏓 A Full-Stack Multiplayer Pong Experience
+## A Full-Stack Multiplayer Pong Experience
 
 **ft_transcendence** is a capstone project that brings together frontend, backend, and real-time communication skills into one modern web application. The challenge: build a fully-functional multiplayer **Pong** game with features like matchmaking, user authentication, and a responsive UI.
 
