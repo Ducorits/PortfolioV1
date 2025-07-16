@@ -32,7 +32,7 @@
 <!-- Button in top-left -->
 <button
   onclick={toggle}
-  class="fixed left-5 top-20 sm:left-20 z-50 w-10 h-10 rounded-full bg-black/80 text-white flex items-center justify-center transition-transform duration-300 ease-in-out border-1 border-blue-600 {buttonRotation}"
+  class="fixed left-5 top-20 lg:left-20 z-50 w-10 h-10 rounded-full bg-black/80 text-white flex items-center justify-center transition-transform duration-300 ease-in-out border-1 border-blue-600 {buttonRotation}"
   aria-label="Toggle Info Overlay"
   {title}
 >
@@ -43,14 +43,14 @@
 <div
   class="fixed top-0 left-0 z-40 w-screen h-screen overflow-hidden pointer-events-none
          [--clip-x:40px] [--clip-y:100px]
-         sm:[--clip-x:100px]"
+         lg:[--clip-x:100px]"
   style="clip-path: circle({$scale *
     130}% at var(--clip-x) var(--clip-y)); transition: clip-path 0.6s;"
 >
   <div
-    class="overlay top-30 sm:top-0 w-full h-full text-white p-8 pointer-events-auto"
+    class="overlay pt-35 lg:pt-10 w-full h-full text-white p-8 pointer-events-auto overflow-y-auto"
   >
-    <div class="max-w-2xl mx-auto prose prose-invert overflow-auto">
+    <div class="max-w-2xl mx-auto prose prose-invert">
       <h2 class="text-3xl font-semibold mb-4">{title}</h2>
       {#if ProjectInfo}
         <ProjectInfo />
