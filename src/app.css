@@ -17,3 +17,7 @@
 :global(.main::-webkit-scrollbar-thumb) {
   color: #93CAED
 }
+
+body {
+  background-color: #111122;
+}

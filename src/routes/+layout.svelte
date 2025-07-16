@@ -7,9 +7,3 @@
 
 <Header />
 {@render children()}
-
-<style lang="postcss">
-  :global(body) {
-    background-color: #111122;
-  }
-</style>

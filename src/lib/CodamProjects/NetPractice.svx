@@ -14,7 +14,7 @@ Rather than writing code, this challenge was about understanding **IP addressing
 
 Each level presented a broken network with a specific goal — for example:
 
-![](assets/NetPractice.png)
+![Example level](assets/NetPractice.png)
 
 - Make all Hosts reach each other
 - Route traffic through multiple routers

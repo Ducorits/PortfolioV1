@@ -61,17 +61,19 @@
   <h2 class="text-2xl font-semibold mb-6 text-white">Flow Field Settings</h2>
 
   <div class="grid grid-cols-2 gap-x-4 gap-y-2">
-    <label class="self-center text-white">Cell Size</label>
+    <label class="self-center text-white" for="cell-size">Cell Size</label>
     <input
+      id="cell-size"
       type="number"
       bind:value={local.cellSize}
       min="1"
       class="col-span-1 w-full text-white bg-[#00000000] rounded px-2 py-1"
     />
 
-    <label class="self-center text-white">Curve</label>
+    <label class="self-center text-white" for="curve-input">Curve</label>
     <div class="flex items-center space-x-2">
       <input
+        id="curve-input"
         type="range"
         bind:value={local.curve}
         min="0"
@@ -82,9 +84,10 @@
       <span class="w-12 text-right text-white">{local.curve}</span>
     </div>
 
-    <label class="self-center text-white">Zoom</label>
+    <label class="self-center text-white" for="zoom-input">Zoom</label>
     <div class="flex items-center space-x-2">
       <input
+        id="zoom-input"
         type="range"
         bind:value={local.zoom}
         min="0.001"
@@ -95,8 +98,11 @@
       <span class="w-16 text-right text-white">{local.zoom}</span>
     </div>
 
-    <label class="self-center text-white">Particle Count</label>
+    <label class="self-center text-white" for="particle-count-input"
+      >Particle Count</label
+    >
     <input
+      id="particle-count-input"
       type="number"
       bind:value={local.particleCount}
       min="0"
@@ -104,8 +110,11 @@
       class="w-full rounded text-white bg-[#00000000] px-2 py-1"
     />
 
-    <label class="self-center text-white">Particle Size</label>
+    <label class="self-center text-white" for="particle-size-input"
+      >Particle Size</label
+    >
     <input
+      id="particle-size-input"
       type="number"
       bind:value={local.particleSize}
       min="0"
@@ -113,8 +122,11 @@
       class="w-full rounded text-white bg-[#00000000] px-2 py-1"
     />
 
-    <label class="self-center text-white">Particle Speed</label>
+    <label class="self-center text-white" for="particle-speed-input"
+      >Particle Speed</label
+    >
     <input
+      id="particle-speed-input"
       type="number"
       bind:value={local.particleSpeed}
       min="0"
@@ -171,12 +183,13 @@
       />
     </div>
 
-    <label class="self-center text-white col-span-2">Particle Colors</label>
+    <p class="self-center text-white col-span-2">Particle Colors</p>
 
     <div class="grid grid-cols-6 col-span-2 gap-1 items-center relative">
       {#each local.particleColors as color, i}
         <div class="flex items-center col-span-2 space-x-2">
           <button
+            aria-label="select a particle color"
             class="w-10 h-10 rounded shadow"
             style="background-color: {color}"
             on:click={async (e) => {
@@ -193,7 +206,7 @@
                 selectedParticleIndex = i;
               }
             }}
-          />
+          ></button>
           <input
             type="text"
             bind:value={color}
