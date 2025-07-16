@@ -48,7 +48,7 @@
     130}% at var(--clip-x) var(--clip-y)); transition: clip-path 0.6s;"
 >
   <div
-    class="overlay pt-35 lg:pt-10 w-full h-full text-white p-8 pointer-events-auto overflow-y-auto"
+    class="overlay py-35 lg:py-10 w-full h-full text-white p-8 pointer-events-auto overflow-y-auto"
   >
     <div class="max-w-2xl mx-auto prose prose-invert">
       <h2 class="text-3xl font-semibold mb-4">{title}</h2>
