@@ -1,0 +1,9 @@
+{
+  "$schema": "https://www.ducorits.nl/vercel.json",
+  "rewrites": [
+    {
+      "source": "/outside/:path*",
+      "destination": "multiappdomaintest.vercel.app/:path*"
+    }
+  ]
+}
