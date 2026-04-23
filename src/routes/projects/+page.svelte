@@ -23,14 +23,31 @@
       <ProjectCard
         href="/codam-graph"
         image="/assets/codam-graph.png"
-        title="Codam graph"
-        description="A cool project visualizing Codam’s curriculum with an interactive graph."
+        title="Codam Coding College Core"
+        description="An interactive visualization of Codam’s Core curriculum.
+        Where I learned programming."
       />
       <ProjectCard
         href="/flow"
         image="/assets/small-flowfield.png"
         title="Flow Field"
         description="A Typescript flow field using PixiJS, used as background for the homepage"
+      />
+      <ProjectCard
+        href="https://github.com/fvan-wij/Cub3d_Telestein3D"
+        target="_blank"
+        image="/assets/telestein.gif"
+        title="Telestein3D / Cub3d"
+        description="A wolfenstein3D inspired horror game, written in C.
+        The walls are rendered using raycasting.
+        Co created with fvan-wij"
+      />
+      <ProjectCard
+        href="https://github.com/Ducorits/FdF"
+        target="_blank"
+        image="/assets/fdf.png"
+        title="FDF"
+        description="Fil de fer, wireframe renderer, project at Codam."
       />
     </div>
   </div>

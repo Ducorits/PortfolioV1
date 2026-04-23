@@ -4,6 +4,7 @@
     image,
     title,
     description,
+    target,
     id,
   }: {
     href?: string | null;
@@ -11,12 +12,15 @@
     title: string;
     description: string;
     id?: string;
+    target?: string;
   } = $props();
+
 </script>
 
 {#if href}
   <a
     {href}
+    {target}
     class="group relative rounded-[20px] w-auto sm:w-95 aspect-[6/4] overflow-hidden border border-blue-600 hover:border-blue-300 bg-[#111] hover:bg-[#1a1a1a] transition-colors"
   >
     {#if image}
