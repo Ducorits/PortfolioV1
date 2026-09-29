@@ -96,13 +96,6 @@
       });
     }
 
-    const handleResize = () => {
-      if (app) {
-        resetScene();
-      }
-    };
-    window.addEventListener("resize", handleResize);
-
     // inside onMount, AFTER you append `app.view`…
     flowField.interactive = true; // enable Pixi interaction
     flowField.hitArea = app.screen;
@@ -130,7 +123,7 @@
           lastMouse.copyFrom(mouse);
         }
       });
-    resetScene();
+    app.ticker.add(update);
   });
 
   function perturbGrid(mouse: Point, dir: Point) {
@@ -210,30 +203,36 @@
 
   function resetScene() {
     if (!app) return;
+
     width = app.screen.width;
     height = app.screen.height;
 
-    // remove previous
-    arrowsLayer.removeChildren();
-    particlesLayer.removeChildren();
-    particles.length = 0;
+    for (const child of arrowsLayer.removeChildren()) {
+      child.destroy();
+    }
+    for (const child of particlesLayer.removeChildren()) {
+      child.destroy();
+    }
 
-    rows = Math.floor(height / cfg.cellSize);
-    cols = Math.floor(width / cfg.cellSize);
+    particles.length = 0;
+    grid = [];
+
+    rows = Math.ceil(height / cfg.cellSize);
+    cols = Math.ceil(width / cfg.cellSize);
 
     setGrid();
     setParticles();
-
-    // Add ticker
-    app.ticker.remove(update);
-    app.ticker.add(update);
   }
 
   function update(ticker: any) {
     if (!app) return;
 
-    width = app.screen.width;
-    height = app.screen.height;
+    if (
+      width !== app.screen.width ||
+      height !== app.screen.height
+    ) {
+      resetScene();
+    }
 
     const fade = new Graphics();
     if (cfg.clearBackground) {
@@ -247,8 +246,6 @@
     }
     if (app) app.renderer.render(fade); // Overlay this fade layer
 
-    cols = Math.floor(width / cfg.cellSize);
-    rows = Math.floor(height / cfg.cellSize);
     const delta = ticker.deltaTime;
     for (let p of particles) {
       let col = Math.floor(p.x / cfg.cellSize);

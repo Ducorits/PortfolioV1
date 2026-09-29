@@ -24,7 +24,7 @@
         Duco Ritsema van Eck
       </h2>
       <p>
-        I'm a software engineer and creative coder who enjoys making cool things
+        I'm a software engineer and creative coder who enjoys making things
         — sometimes technical, sometimes silly.<br /> I studied at
         <a
           href="https://www.codam.nl/en/about-codam/"
@@ -44,12 +44,10 @@
         </a>, where we learn by doing.
       </p>
       <p>
-        Outside of code, I love Games, 3D graphics, the absurd brilliance of
-        Terry Pratchett, dad jokes, playing piano and guitar, and cracking open
-        hardware just to see what’s inside.
+        Outside of code, I enjoy, board and video games, 3D graphics, reading, dad jokes, playing piano and guitar, making with my hands and tinkering with hardware or computers.
       </p>
       <p>
-        Not everything I do needs a purpose, but most of it starts with
+        Most of what I do starts with
         curiosity.
       </p>
       <div class="flex flex-row text-[24px] gap-2 pt-4">
