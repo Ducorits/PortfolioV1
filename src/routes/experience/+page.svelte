@@ -30,7 +30,7 @@
           href="https://www.codam.nl/en/about-codam/"
           target="_blank"
           rel="noopener noreferrer"
-          class="underline text-gray-500 hover:text-violet-400 transition-colors"
+          class="underline text-gray-400 hover:text-violet-400 transition-colors"
         >
           Codam Coding College
         </a>, part of the
@@ -38,7 +38,7 @@
           href="https://www.42network.org/"
           target="_blank"
           rel="noopener noreferrer"
-          class="underline text-gray-500 hover:text-violet-400 transition-colors"
+          class="underline text-gray-400 hover:text-violet-400 transition-colors"
         >
           42 network
         </a>, is a school that uses peer to peer learning as it's basis.
@@ -51,6 +51,13 @@
       </p>
       <p>
         For information on what kind of projects see:
+        <a
+          href="/codam-graph"
+          rel="noopener noreferrer"
+          class="underline text-gray-400 hover:text-violet-400 transition-colors"
+        >
+          /codam-graph
+        </a>
 
       </p>
     </div>

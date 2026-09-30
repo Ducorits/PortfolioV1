@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fade, fly } from "svelte/transition";
+  import { fly } from "svelte/transition";
   import { onDestroy, onMount } from "svelte";
   import { codamProjectMap } from "$lib/projectContent";
 

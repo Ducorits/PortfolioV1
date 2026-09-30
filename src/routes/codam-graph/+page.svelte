@@ -21,5 +21,6 @@
   {open}
   close={() => {
     open = false;
+    selectedProject.id = "";
   }}
 />
