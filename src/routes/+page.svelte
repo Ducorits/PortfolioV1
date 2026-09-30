@@ -8,7 +8,7 @@
   <title>Duco Ritsema van Eck | Software Engineer</title>
 </svelte:head>
 
-<div class="flex flex-1 w-full pt-10 pb-10 justify-center">
+<div class="flex flex-1 w-full pt-10 pb-10 justify-center z-1">
   <div
     class="flex flex-col xl:flex-row w-full px-10 md:px-0 md:w-2/3 md:justify-between gap-[40px]"
   >
