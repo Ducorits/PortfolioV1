@@ -1,6 +1,3 @@
-<script>
-  import { Github, Linkedin } from "@lucide/svelte";
-</script>
 
 <svelte:head>
   <title>experience</title>
@@ -17,6 +14,7 @@
         experience.
       </h1>
     </div>
+
     <div
       class="flex flex-col gap-6 md:mt-10 rounded-[20px] h-full p-6 w-full text-gray-200"
     >

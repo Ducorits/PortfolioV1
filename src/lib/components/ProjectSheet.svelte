@@ -72,7 +72,5 @@
     overflow-y: auto;
     height: calc(100% - 60px); /* adjust based on header height */
     padding-right: 1rem;
-    scrollbar-width: thin;
-    scrollbar-color: #155dfc #111111;
   }
 </style>

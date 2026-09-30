@@ -68,7 +68,5 @@
   .overlay {
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
-    scrollbar-width: thin;
-    scrollbar-color: #155dfc #111111;
   }
 </style>
