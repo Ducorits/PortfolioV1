@@ -3,14 +3,13 @@
   import { browser } from "$app/environment";
   import { Application, Container, Graphics, Point } from "pixi.js";
   import { settings, type FlowSettings } from "$lib/stores/settings";
-  import FlowSettingsPanel from "./FlowSettingsPanel.svelte";
-  import { Proportions } from "@lucide/svelte";
 
   let app: Application | null = null;
 
   let container: HTMLDivElement;
 
   // Layers & data
+  let fade: Graphics;
   let arrowsLayer: Container;
   let particlesLayer: Container;
   const particles: Graphics[] = $state([]);
@@ -77,10 +76,11 @@
 
     // Append the application canvas to the document body
     container.appendChild(app.canvas);
-    app.canvas.classList.add("fixed", "inset-0", "-z-10");
+    app.canvas.classList.add("fixed", "inset-0", "z-0");
 
     // Main container
     const flowField = new Container();
+    fade = new Graphics();
     arrowsLayer = new Container();
     particlesLayer = new Container();
     flowField.addChild(arrowsLayer, particlesLayer);
@@ -207,6 +207,14 @@
     width = app.screen.width;
     height = app.screen.height;
 
+    fade
+    .clear()
+    .rect(0, 0, width, height)
+    .fill({
+      color: cfg.backgroundColor,
+      alpha: cfg.clearBackground ? 1 : cfg.fadeAlpha,
+    });
+
     for (const child of arrowsLayer.removeChildren()) {
       child.destroy();
     }
@@ -234,17 +242,10 @@
       resetScene();
     }
 
-    const fade = new Graphics();
-    if (cfg.clearBackground) {
-      fade
-        .rect(0, 0, width, height)
-        .fill({ color: cfg.backgroundColor, alpha: 1 });
-    } else {
-      fade
-        .rect(0, 0, width, height)
-        .fill({ color: cfg.backgroundColor, alpha: cfg.fadeAlpha });
-    }
-    if (app) app.renderer.render(fade); // Overlay this fade layer
+    app.renderer.render({
+      container: fade,
+      clear: false,
+    });
 
     const delta = ticker.deltaTime;
     for (let p of particles) {
@@ -270,12 +271,17 @@
 
   onDestroy(() => {
     unsub();
+
     if (app) {
-      // window.removeEventListener("resize", handleResize);
+      app.ticker.remove(update);
+      fade?.destroy();
       app.destroy(true);
       app = null;
     }
+
+    particles.length = 0;
+    grid = [];
   });
 </script>
 
-<div class="absolute inset-0 -z-10" bind:this={container}></div>
+<div class="absolute inset-0 z-0" bind:this={container}></div>

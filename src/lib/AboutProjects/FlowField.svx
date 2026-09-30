@@ -1,0 +1,16 @@
+This is a flow field I created using pixiJS and svelte. It visually represents the movement and interaction of particles within a dynamic field.
+
+**The Reason**
+
+It looks really cool and I wanted a nice splashscreen for the website.
+So I decided to create one myself.
+
+**The Settings**
+
+I added different settings to control the behavior and appearance of the flow field, such as particle speed, density, and color.
+You can select multiple colors for the particles to create a more vibrant and dynamic visual effect.
+
+Mouse dragging enables a direct interaction with the flow field, allowing you to influence the movement of particles, it is a little janky as particles can get stuck or behave unpredictably.
+
+---
+This flow field was made using pixiJS and svelte.

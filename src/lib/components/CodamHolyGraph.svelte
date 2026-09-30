@@ -40,7 +40,7 @@
       "left-0",
       "w-screen",
       "h-screen",
-      "-z-10"
+      "z-0"
     );
 
     const viewport = new Viewport({
@@ -170,4 +170,4 @@
   });
 </script>
 
-<div class="absolute inset-0 -z-10" bind:this={container}></div>
+<div class="absolute inset-0 z-0" bind:this={container}></div>

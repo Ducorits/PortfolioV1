@@ -21,3 +21,34 @@
 body {
   background-color: #111122;
 }
+
+/* Firefox and modern Chromium browsers */
+html {
+	scrollbar-width: thin;
+	scrollbar-color: #155dfc #11111100;
+}
+
+/* Also style any independently scrolling elements */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #155dfc #11111100;
+}
+
+/* Fallback for browsers using WebKit scrollbar styling */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #155dfc;
+	border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #155dfc;
+}

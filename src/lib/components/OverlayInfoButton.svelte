@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+
   import { tweened } from "svelte/motion";
-  import { cubicOut, linear } from "svelte/easing";
+  import { linear } from "svelte/easing";
   import { aboutProjectMap } from "$lib/projectContent";
-  import { derived } from "svelte/store";
 
   let { title, projectId } = $props();
 
@@ -41,14 +40,14 @@
 
 <!-- Overlay expanding from the button -->
 <div
-  class="fixed top-0 left-0 z-40 w-screen h-screen overflow-hidden pointer-events-none
+  class="fixed overlay top-0 left-0 z-40 w-screen h-screen overflow-hidden pointer-events-none
          [--clip-x:40px] [--clip-y:100px]
          lg:[--clip-x:100px]"
   style="clip-path: circle({$scale *
-    130}% at var(--clip-x) var(--clip-y)); transition: clip-path 0.6s;"
+    140}% at var(--clip-x) var(--clip-y)); transition: clip-path 0.6s;"
 >
   <div
-    class="overlay py-35 lg:py-10 w-full h-full text-white p-8 pointer-events-auto overflow-y-auto"
+    class="py-35 lg:py-10 w-full h-full text-white p-8 pointer-events-auto overflow-y-auto"
   >
     <div class="max-w-2xl mx-auto prose prose-invert">
       <h2 class="text-3xl font-semibold mb-4">{title}</h2>
@@ -67,7 +66,7 @@
 
 <style>
   .overlay {
+    background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.4);
   }
 </style>
