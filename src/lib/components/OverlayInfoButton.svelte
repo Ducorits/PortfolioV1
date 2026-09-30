@@ -44,7 +44,7 @@
          [--clip-x:40px] [--clip-y:100px]
          lg:[--clip-x:100px]"
   style="clip-path: circle({$scale *
-    130}% at var(--clip-x) var(--clip-y)); transition: clip-path 0.6s;"
+    140}% at var(--clip-x) var(--clip-y)); transition: clip-path 0.6s;"
 >
   <div
     class="py-35 lg:py-10 w-full h-full text-white p-8 pointer-events-auto overflow-y-auto"
@@ -68,5 +68,7 @@
   .overlay {
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
+    scrollbar-width: thin;
+    scrollbar-color: #155dfc #111111;
   }
 </style>
