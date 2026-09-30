@@ -1,63 +1,197 @@
+<script lang="ts">
+	import type { Component } from "svelte";
+	import CodamExperience from "$lib/components/CodamExperience.svelte";
 
-<svelte:head>
-  <title>experience</title>
-</svelte:head>
+	type Experience = {
+		id: string;
+		title: string;
+		start: string;
+		end?: string;
+		description?: string;
+		content?: Component;
+	};
+
+	const experiences: Experience[] = [
+		{
+			id: "bluecurrent",
+			title: "Blue Current",
+			start: "2025-09-01",
+			description: "As a backend Software Engineer, working primary with an Oracle Database."
+		},
+		{
+			id: "codam",
+			title: "Codam Coding College",
+			start: "2021-10-01",
+			end: "2026-05-12",
+			content: CodamExperience
+		},
+	];
+
+	function formatDate(value: string): string {
+		// Preserve the precision of the supplied date.
+		if (/^\d{4}$/.test(value)) return value;
+
+		const [year, month, day] = value.split("-").map(Number);
+
+		return new Intl.DateTimeFormat("en-GB", {
+			...(day !== undefined ? { day: "numeric" as const } : {}),
+			month: "short",
+			year: "numeric",
+			timeZone: "UTC"
+		}).format(new Date(Date.UTC(year, month - 1, day ?? 1)));
+	}
+</script>
 
 <div class="flex w-full h-full pt-10 pb-10 justify-center">
-  <div
-    class="flex flex-col xl:flex-row w-full px-6 md:px-0 md:w-2/3 h-full justify-center md:justify-between gap-10"
-  >
-    <div class="w-full xl:w-auto flex">
-      <h1
-        class="text-gray-300 text-[60px] md:text-[100px] leading-[100px] md:leading-[120px]"
-      >
-        experience.
-      </h1>
-    </div>
+	<section class="experience flex flex-col min-[1600px]:flex-row w-full px-6 md:px-0 md:w-2/3 h-full justify-center md:justify-between gap-10">
+		<h1
+		class="text-gray-300 text-[60px] md:text-[100px] leading-[100px] md:leading-[120px]">experience.
+		</h1>
 
-    <div
-      class="flex flex-col gap-6 md:mt-10 rounded-[20px] h-full p-6 w-full text-gray-200"
-    >
-      <h2 class="text-gray-300 text-[28px] sm:text-[40px] leading-tight">
-        Codam Coding College
-      </h2>
-      <p>
-        I started learning software at Codam, where we learn in a very hands on manner.
-        <br />
-        <a
-          href="https://www.codam.nl/en/about-codam/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="underline text-gray-400 hover:text-violet-400 transition-colors"
-        >
-          Codam Coding College
-        </a>, part of the
-        <a
-          href="https://www.42network.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="underline text-gray-400 hover:text-violet-400 transition-colors"
-        >
-          42 network
-        </a>, is a school that uses peer to peer learning as it's basis.
-        <br />
-      </p>
-      <p>
-        What this means is that we learned by creating projects, no teachers, no lectures, we learned from other students.
-        <br />
-        We also have to evaluate each other, I evaluate someone's project, a code review if you will, and someone else evaluates my projects in turn.
-      </p>
-      <p>
-        For information on what kind of projects see:
-        <a
-          href="/codam-graph"
-          rel="noopener noreferrer"
-          class="underline text-gray-400 hover:text-violet-400 transition-colors"
-        >
-          /codam-graph
-        </a>
+		<ol class="timeline">
+			{#each experiences as experience, index (experience.id)}
+				<li class="timeline-item" class:right={index % 2 === 1}>
+					<span class="timeline-dot" aria-hidden="true"></span>
 
-      </p>
-    </div>
-  </div>
+					<article class="experience-content">
+						<p class="date">
+							<time datetime={experience.start}>
+								{formatDate(experience.start)}
+							</time>
+							<span> — </span>
+							{#if experience.end}
+								<time datetime={experience.end}>
+									{formatDate(experience.end)}
+								</time>
+							{:else}
+								<span>Present</span>
+							{/if}
+						</p>
+
+						<h2>{experience.title}</h2>
+						<div class="experience-body text-gray-400">
+							{#if experience.content}
+								{@const Content = experience.content}
+								<Content />
+							{:else if experience.description}
+								<p>{experience.description}</p>
+							{/if}
+						</div>
+					</article>
+				</li>
+			{/each}
+		</ol>
+	</section>
 </div>
+
+<style>
+	.experience {
+		--timeline-color: #1447e6;
+		color: var(--timeline-color);
+	}
+
+	h1 {
+		margin: 0 0 3rem;
+		text-align: left;
+	}
+
+	.timeline {
+		position: relative;
+		max-width: 70rem;
+		margin: 0 auto;
+		padding: 2rem 0;
+		list-style: none;
+	}
+
+	.timeline::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		width: 2px;
+		transform: translateX(-50%);
+		background: var(--timeline-color);
+		opacity: 0.8;
+	}
+
+	.timeline-item {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		column-gap: 5rem;
+	}
+
+	.timeline-item + .timeline-item {
+		margin-top: 5rem;
+	}
+
+	.timeline-dot {
+		position: absolute;
+		top: 0.1rem;
+		left: 50%;
+		width: 14px;
+		height: 14px;
+		/* border-color: #101122; */
+		border: 2px solid var(--timeline-color);
+		border-radius: 50%;
+		transform: translateX(-50%);
+		background: #101122;
+	}
+
+	.experience-content {
+		grid-column: 1;
+		text-align: right;
+	}
+
+	.right .experience-content {
+		grid-column: 2;
+		text-align: left;
+	}
+
+	.date {
+		margin: 0 0 0.75rem;
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: #4a5565;
+		text-align: right;
+	}
+
+	.right .date {
+		margin: 0 0 0.75rem;
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: #4a5565;
+		text-align: left;
+	}
+
+	h2 {
+		margin: 0 0 0.75rem;
+		font-size: 1.5rem;
+		color: #d1d5dc;
+	}
+
+	.experience-content > p:last-child {
+		margin: 0;
+		line-height: 1.7;
+		color: #99a1af;
+	}
+
+	@media (max-width: 640px) {
+		.timeline::before,
+		.timeline-dot {
+			left: 0;
+		}
+
+		.timeline-item {
+			grid-template-columns: minmax(0, 1fr);
+			padding-left: 2rem;
+		}
+
+		.experience-content,
+		.right .experience-content {
+			grid-column: 1;
+			text-align: left;
+		}
+	}
+</style>
