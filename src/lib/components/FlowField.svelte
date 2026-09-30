@@ -3,8 +3,6 @@
   import { browser } from "$app/environment";
   import { Application, Container, Graphics, Point } from "pixi.js";
   import { settings, type FlowSettings } from "$lib/stores/settings";
-  import FlowSettingsPanel from "./FlowSettingsPanel.svelte";
-  import { Proportions } from "@lucide/svelte";
 
   let app: Application | null = null;
 
@@ -77,7 +75,7 @@
 
     // Append the application canvas to the document body
     container.appendChild(app.canvas);
-    app.canvas.classList.add("fixed", "inset-0", "-z-10");
+    app.canvas.classList.add("fixed", "inset-0", "z-0");
 
     // Main container
     const flowField = new Container();
@@ -278,4 +276,4 @@
   });
 </script>
 
-<div class="absolute inset-0 -z-10" bind:this={container}></div>
+<div class="absolute inset-0 z-0" bind:this={container}></div>

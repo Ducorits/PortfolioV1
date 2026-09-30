@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-  <title>about</title>
+  <title>experience</title>
 </svelte:head>
 
 <div class="flex w-full h-full pt-10 pb-10 justify-center">
@@ -14,18 +14,18 @@
       <h1
         class="text-gray-300 text-[60px] md:text-[100px] leading-[100px] md:leading-[120px]"
       >
-        about.
+        experience.
       </h1>
     </div>
     <div
-      class="flex flex-col gap-6 md:mt-10 bg-[#111111] border-blue-600 border rounded-[20px] h-full p-6 w-full text-gray-200"
+      class="flex flex-col gap-6 md:mt-10 rounded-[20px] h-full p-6 w-full text-gray-200"
     >
       <h2 class="text-gray-300 text-[28px] sm:text-[40px] leading-tight">
-        Duco Ritsema van Eck
+        Codam Coding College
       </h2>
       <p>
-        I'm a software engineer and creative coder who enjoys making things
-        — sometimes technical, sometimes silly.<br /> I studied at
+        I started learning software at Codam, where we learn in a very hands on manner.
+        <br />
         <a
           href="https://www.codam.nl/en/about-codam/"
           target="_blank"
@@ -41,36 +41,18 @@
           class="underline text-gray-500 hover:text-violet-400 transition-colors"
         >
           42 network
-        </a>, where we learn by doing.
+        </a>, is a school that uses peer to peer learning as it's basis.
+        <br />
       </p>
       <p>
-        Outside of code, I enjoy, board and video games, 3D graphics, reading, dad jokes, playing piano and guitar, making with my hands and tinkering with hardware or computers.
+        What this means is that we learned by creating projects, no teachers, no lectures, we learned from other students.
+        <br />
+        We also have to evaluate each other, I evaluate someone's project, a code review if you will, and someone else evaluates my projects in turn.
       </p>
       <p>
-        Most of what I do starts with
-        curiosity.
+        For information on what kind of projects see:
+
       </p>
-      <div class="flex flex-row text-[24px] gap-2 pt-4">
-        <p>Links:</p>
-        <a
-          href="https://github.com/Ducorits"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex flex-row text-gray-500 hover:text-violet-400 text-[24px] transition-colors"
-        >
-          <p>Github_</p>
-          <Github size={28} />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/duco-ritsema-van-eck-b8399b239/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex flex-row text-gray-500 hover:text-violet-400 text-[24px] transition-colors"
-        >
-          <p>Linked_</p>
-          <Linkedin size={28} />
-        </a>
-      </div>
     </div>
   </div>
 </div>

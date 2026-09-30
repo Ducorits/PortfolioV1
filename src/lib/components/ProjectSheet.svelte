@@ -36,7 +36,7 @@
 
 <aside
   transition:fly={{ x: 300 }}
-  class="sheet flex-shrink w-full z-100 sm:z-0 sm:w-[600px] h-full bg-black/50 backdrop-blur-lg pl-[20px] pt-[10px] text-white rounded-l-sm transform transition-transform duration-300 ease-in-out
+  class="sheet flex-shrink w-full z-100 sm:z-0 sm:w-[600px] h-full bg-black/50 backdrop-blur-lg pl-[20px] pt-[74px] text-white rounded-l-sm transform transition-transform duration-300 ease-in-out
          {open ? 'translate-x-0' : 'translate-x-full'}"
 >
   <div class="sticky top-0 z-10 flex items-center gap-4">
@@ -72,5 +72,7 @@
     overflow-y: auto;
     height: calc(100% - 60px); /* adjust based on header height */
     padding-right: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: #155dfc #111111;
   }
 </style>

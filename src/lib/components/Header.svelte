@@ -1,4 +1,4 @@
-<header class="flex justify-center w-full">
+<header class="relative z-10 flex justify-center w-full">
   <div
     class="flex border-b-1 md:border-l-1 md:border-r-1 w-full md:w-2/3 h-16 px-4 py-3 shadow items-center justify-between rounded-b-lg text-gray-300 bg-[#111111] border-blue-700"
   >

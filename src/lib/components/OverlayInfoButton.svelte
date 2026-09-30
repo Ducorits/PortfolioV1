@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+
   import { tweened } from "svelte/motion";
-  import { cubicOut, linear } from "svelte/easing";
+  import { linear } from "svelte/easing";
   import { aboutProjectMap } from "$lib/projectContent";
-  import { derived } from "svelte/store";
 
   let { title, projectId } = $props();
 

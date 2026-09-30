@@ -55,7 +55,7 @@
 </button>
 
 <aside
-  class="fixed top-14 right-0 h-full w-100 bg-black/50 backdrop-blur-lg p-6 overflow-y-auto rounded-bl-lg transform transition-transform duration-300 ease-in-out
+  class="fixed top-14 right-0 h-full w-100 bg-black/50 backdrop-blur-lg p-6 overflow-y-auto rounded-bl-lg transform transition-transform duration-300 ease-in-out content-wrapper
 {open ? 'translate-x-0' : 'translate-x-full'}"
 >
   <h2 class="text-2xl font-semibold mb-6 text-white">Flow Field Settings</h2>
@@ -186,7 +186,7 @@
     <p class="self-center text-white col-span-2">Particle Colors</p>
 
     <div class="grid grid-cols-6 col-span-2 gap-1 items-center relative">
-      {#each local.particleColors as color, i}
+      {#each local.particleColors as color, i (i)}
         <div class="flex items-center col-span-2 space-x-2">
           <button
             aria-label="select a particle color"
@@ -308,3 +308,13 @@
     onClose={() => (showBackgroundPicker = false)}
   />
 {/if}
+
+<style>
+    .content-wrapper {
+    overflow-y: auto;
+    height: calc(100% - 60px); /* adjust based on header height */
+    padding-right: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: #155dfc #111111;
+  }
+</style>
