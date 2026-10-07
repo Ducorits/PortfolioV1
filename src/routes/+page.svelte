@@ -6,6 +6,8 @@
 
 <svelte:head>
   <title>Duco Ritsema van Eck | Software Engineer</title>
+
+  <link rel="canonical" href="https://ducorits.nl" />
 </svelte:head>
 
 <div class="relative isolate flex flex-1 w-full pt-10 bottom-fade pb-10 justify-center z-1">
